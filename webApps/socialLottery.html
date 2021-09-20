@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css"> 
+<!-- 
+body  {
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	background: #666666;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	background-color: #F8C806;
+}
+.thrColFix #container { 
+	width: 780px;  /* using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
+	background: #FFFFFF;
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	border: 1px solid #000000;
+	text-align: left; /* this overrides the text-align: center on the body element. */
+} 
+.thrColFix #sidebar1 {
+	float: left; /* since this element is floated, a width must be given */
+	width: 150px; /* the actual width of this div, in standards-compliant browsers, or standards mode in Internet Explorer will include the padding and border in addition to the width */
+	background: #EBEBEB; /* the background color will be displayed for the length of the content in the column, but no further */
+	padding: 15px 10px 15px 20px; /* padding keeps the content of the div away from the edges */
+}
+.thrColFix #sidebar2 {
+	float: right; /* since this element is floated, a width must be given */
+	width: 160px; /* the actual width of this div, in standards-compliant browsers, or standards mode in Internet Explorer will include the padding and border in addition to the width */
+	background: #EBEBEB; /* the background color will be displayed for the length of the content in the column, but no further */
+	padding: 15px 10px 15px 20px; /* padding keeps the content of the div away from the edges */
+}
+.thrColFix #mainContent { 
+	margin: 0 200px; /* the right and left margins on this div element creates the two outer columns on the sides of the page. No matter how much content the sidebar divs contain, the column space will remain. You can remove this margin if you want the #mainContent div's text to fill the sidebar spaces when the content in each sidebar ends. */
+	padding: 0 10px; /* remember that padding is the space inside the div box and margin is the space outside the div box */
+}
+.fltrt { /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+.thrColFix #container #mainContent h1 {
+	text-align: center;
+}
+.thrColFix #container #sidebar1 table tr td {
+	color: #000;
+}
+.thrColFix #container #sidebar2 table tr td {
+	color: #000;
+}
+.thrColFix table tr td {
+	text-align: center;
+	font-size: x-large;
+	font-weight: bold;
+	color: #C3000A;
+}
+--> 
+</style><!--[if IE 5]>
+<style type="text/css"> 
+/* place css box model fixes for IE 5* in this conditional comment */
+.thrColFix #sidebar1 { width: 180px; }
+.thrColFix #sidebar2 { width: 190px; }
+</style>
+<![endif]--><!--[if IE]>
+<style type="text/css"> 
+/* place css fixes for all versions of IE in this conditional comment */
+.thrColFix #sidebar2, .thrColFix #sidebar1 { padding-top: 30px; }
+.thrColFix #mainContent { zoom: 1; }
+/* the above proprietary zoom property gives IE the hasLayout it needs to avoid several bugs */
+</style>
+<![endif]-->
+<script language="javascript" type="text/javascript">
+
+var descriptions = new Array();
+	
+	descriptions.push( "AELIA - Slave: Congratulations! You Lost the Social Lottery!  Your father was a citizen of Rome but in order to pay his debts he sold you into slavery.  Your life is hopeless." );
+	
+	descriptions.push("	TIBERIUS  - Slave: Congratulations! You Lost the Social Lottery! Your small town in Macedonia was vanquished by the Roman Army.  And you were taken by the Roman government to work in the mines.  ");
+	
+	descriptions.push("	AEMILIA – Slave: Congratulations! You Lost the Social Lottery!  Your small town in Gaul (modern day France) was pillaged by the Roman Army.  Every one of the inhabitants of your town were mercilessly killed in a genocidal slaughter by the Roman Army. You were allowed to live to tell the story.");
+	
+	descriptions.push("	AEMILIANO – Slave: Congratulations! You Lost the Social Lottery!  You were born into slavery and raised to work on the Roman aqueducts.  The work is tiring and dangerous and you lost half of your face in a fire explosion.");
+	
+	descriptions.push("	AEMILIANUS – Slave: Congratulations! You Lost the Social Lottery! You were born into slavery and tried to buy your way out by fighting as a gladiator.  You lost two arms and a leg in a battle with a stronger opponent.  Now you are an object of ridicule and are kept by a slave master so he can laugh at you as you hop around his home.  ");
+	
+	descriptions.push("	BALBINA – Slave: Congratulations! You Lost the Social Lottery! You were born to two slaves and had a slave master who enjoys torturing you. You are routinely beaten by your slave master for lack of preparation for meals.   ");
+	
+	descriptions.push("BLANDINA- Plebeian: Congratulations! You Lost the Social Lottery! You live in squalor.  All the employment in Rome is taken by the free labor of the slaves.  You live in a one room apartment with 28 other people.  There is the constant fear of violence and death.");
+	
+	descriptions.push("	BLANDUS – Plebeian: Congratulations! You Lost the Social Lottery!  You’re a farmer who works on the outskirts of Rome.  Many of your friends have lost their jobs to the free labor but because of Roman law, landowners must now keep at least 1/3 of his employees as freemen.  ");
+	
+	descriptions.push("BLASIUS  -  Plebeian: Congratulations! You Lost the Social Lottery!  You are a Roman soldier who has spent the last 12 years away  from home.  You slaughtered hundreds if not thousands of soldiers and innocent human beings during the time you were away.  You were rewarded by the Roman government with land to farm outside of Rome.");
+	
+	descriptions.push("SALADINIUS - Slave: Congratulations! You Lost the Social Lottery! You are a slave but you are treated extremely well.  Your master is an influential Roman senator.  You live in luxury and have been well educated.");
+	
+	descriptions.push("	CAECILIUS - Patrician: Congratulations! You WON the Social Lottery!   You are a patrician as your family roots can be traced back to the beginning of Rome.  You are very wealthy and influential in Roman government.");
+	
+	descriptions.push("	TRITUS – Plebeian: Congratulations! You Lost the Social Lottery! You are a merchant on the outskirts of the Roman Empire. Your life is difficult but you have been able to make ends meet for your family.  ");
+	
+	descriptions.push(" CAELIUS – Plebeian: Congratulations! You Lost the Social Lottery! You are a plebeian artisan on the outskirts of the Roman Empire.");
+	
+	descriptions.push("	CAESAR -  Plebeian: Congratulations! You Lost the Social Lottery! You are a  plebian tax collector on the outskirts of the Roman Empire.  You are hated by all and your life is always in danger.");
+	
+	descriptions.push("	CAMILLA –  Plebeian: Congratulations! You Lost the Social Lottery! You are a  housewife of a plebeian in Rome and you share an apartment with 25 other citizens.  Your life is uncomfortable and depressing.");
+	
+	descriptions.push("	CAMILLUS - Plebeian: Congratulations! You Lost the Social Lottery! You are a poet and a playwright and not a very good one.   Therefore, you are starving along with your wife and 13 children. You had 15 but you sold two of them into slavery to pay the bills.");
+	
+	descriptions.push("CASSIA – Patrician: Congratulations! You Won the Social Lottery!  You are the son of a Roman General.   You have 25 personal slaves and live a fabulous life. ");
+	
+	descriptions.push("CASSIAN - PATRICIAN: Congratulations! You WON the Social Lottery!  You are a Roman senator who was born to a wealthy family.  You are highly educated and very influential in the Roman Senate.  You own over 1700 slaves. ");
+	
+	descriptions.push("	NEWTOWNIUS- Plebeian: Congratulations you lost the Social Lottery.  You grew up poor but were thrifty enough to start a trading business that you have built into an empire.  Even though your are not a patrician your wealth provides you with great influence in the Roman Senate.");
+	
+	descriptions.push("CASSIUS - Slave: Congratulations! You Lost the Social Lottery! You were born to two slaves and had a slave master who enjoys torturing you. You are routinely beaten by your slave master for lack of preparation for meals. ");
+	
+	descriptions.push("	LAWRENCIUS - Slave: Congratulations! You Lost the Social Lottery!  Your father was a citizen of Rome but in order to pay his debts he sold you into slavery  .");
+	
+	descriptions.push(" CLOELIUS - Slave: Congratulations! You Lost the Social Lottery! Your small town in Macedonia was vanquished by the Roman Army.  You were taken by the Roman government to work in the mines.  ");
+	
+	descriptions.push(" CNAEUS - Slave: Congratulations! You Lost the Social Lottery! You are a slave but you are treated extremely well.  Your master is an influential Roman senator.  You live in luxury and have been well educated.");
+	
+	descriptions.push("CORNELIA Slave: Congratulations! You Lost the Social Lottery!  You were born into slavery and raised to work on the Roman aqueducts.  The work is tiring and dangerous and you lost half of your face in a fire explosion.");
+	
+	descriptions.push(" LISANIUS Slave: Congratulations! You Lost the Social Lottery!  Your father was a citizen of Rome but in order to pay his debts he sold you into slavery.  Your life is hopeless.");
+	
+var descriptionsCopy = new Array();
+
+for( var i = 0; i < descriptions.length; i++)
+{
+	descriptionsCopy.push( descriptions[i] );
+}
+
+var counter = 0; 
+
+function onSubmit()
+{
+	if( counter < descriptions.length )
+	{
+		var r = Math.floor( ( Math.random() * descriptions.length-1 ) + 1 );
+		
+		while( descriptions[r] == "" )
+		{
+			r = (r+1)%descriptions.length;
+		}
+			
+		document.getElementById("txtlotteryResults").value = descriptions[r];
+		descriptions[r] = "";
+		
+		counter++;
+	}
+	else
+	{
+		descriptions = new Array();
+		
+		for( var i = 0; i < descriptionsCopy.length; i++)
+		{
+			descriptions.push( descriptionsCopy[i] );
+		}
+
+		counter = 0;
+	}
+	
+}
+
+function clearForm()
+{
+	var txtName = document.getElementById("txtName");
+	var txtlotteryResults = document.getElementById("txtlotteryResults");
+	
+	txtName.value = "";
+	txtlotteryResults.value = "";
+	
+	
+}
+
+</script>
+
+</head>
+
+<body class="thrColFix">
+
+<div id="container"></div>
+<table width="715" height="578" border="1" align="center">
+  <tr>
+    <td width="153" bgcolor="#BA0001">&nbsp;</td>
+    <td width="409">Ancient Rome Social Lottery Application</td>
+    <td width="153" bgcolor="#BA0001">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><img src="../romeImage.jpg" width="275" height="183" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#BA0001">&nbsp;</td>
+    <td>
+<table width="283" height="116" border="1" align="center">
+          <tr>
+            <td align="center">Name</td>
+        </tr>
+          <tr>
+            <td align="center"><label>
+              <input type="text" name="txtName" id="txtName" />
+            </label></td>
+        </tr>
+          <tr>
+            <td align="center">
+              <button style="color:#FFF; background:#F00;" onclick="onSubmit();">Submit</button>
+              <button style="color:#FFF; background:#F00;" onclick="clearForm();">Clear</button>
+            </td>
+        </tr>
+      </table>
+      <table width="150" border="1" align="center">
+        <tr>
+          <td>Lottery Results</td>
+        </tr>
+      </table>
+   
+      <label>
+        <textarea name="txtlotteryResults" id="txtlotteryResults" cols="45" rows="5"></textarea>
+      </label>
+    </td>
+    <td bgcolor="#C3000A">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

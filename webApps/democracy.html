@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+<script language="javascript" type="text/javascript">
+
+function calculateTotalVotes()
+{
+	var felBox = document.getElementById("felBox").checked;
+	var numEQS = document.getElementById("numEQS").value;
+	var numVote =document.getElementById ("numVote").value;
+	var numRegVote = document.getElementById("numRegVote").value;
+	var numChild = parseInt(document.getElementById ("numChild").value);
+	var incomeTax = document.getElementById ("incomeTax").checked;
+	var totalVotes = 0;
+	var numTotalVotes = document.getElementById("numTotalVotes");
+	
+    if(!felBox)
+	{
+		totalVotes += 2;
+		
+	}
+	
+	if(numEQS >= 8)
+	{
+		totalVotes += 4; 
+	}
+    else if(numEQS >= 5)
+	{
+		totalVotes += 2;
+	}
+	else 
+	{
+		totalVotes += 1;
+		
+	}
+	
+	if(numVote == 5)
+	{
+		totalVotes += 3;
+	}
+	else 
+	{
+		totalVotes += 1;
+		
+	}
+	
+	if(numRegVote >= 5)
+	{
+		totalVotes += 4;
+	}
+	else
+	{
+		totalVotes += 1;
+	}
+	
+	totalVotes += numChild;
+	
+	if (incomeTax)
+	{
+		totalVotes += 3;
+	}
+	
+	// At this point. total votes is calculated.
+	
+	numTotalVotes.value = totalVotes;
+	
+}
+</script>
+
+
+
+
+
+
+
+<style type="text/css">
+<!--
+.txtTitel {
+	text-align: center;
+}
+body p {
+	font-size: 18px;
+}
+.checkboxRequiredMsg {
+	font-size: 24px;
+}
+body p {
+	color: #FFF;
+}
+body p {
+	color: #FFF;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-align: justify;
+}
+.cc {
+	color: #FFF;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+.xxx {
+	font-size: large;
+	font-family: "Arial Black", Gadget, sans-serif;
+	text-align: center;
+}
+.ccx {
+	color: #FFF;
+}
+.ccx {
+	color: #FFF;
+}
+.ccx {
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+.vvv {
+	text-align: center;
+}
+-->
+</style>
+<script src="SpryAssets/SpryValidationCheckbox.js" type="text/javascript"></script>
+<link href="SpryAssets/SpryValidationCheckbox.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<table width="100%" border="1">
+  <tr>
+    <td width="1373" bgcolor="#0033FF">
+          <p class="xxx"> Algorithim for Proportional Democracy (Meritocracy)</p>  
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p>The premise of this endeavor is not to marginalize members of society.  Our contention is that all people should have a say in government but not an equal say.  The people that contribute more to society and value their responsibiliites as a citizen more than others should be given more access to government. Moreover, this equation does compensate for poverty, race and educational deprivation.</p>
+<p></p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p><span class="ccx">1. <span class="ccx">Check here if you have been convicted of a felony crime. </span><span id="sprycheckbox1">
+      <label>
+        <input type="checkbox" name="felBox" id="felBox" />
+      </label>
+    </span></span></p>
+    <p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p><span class="ccx">2.  Enter your E.Q. score (1-10)</span><span class="cc">. </span>      
+      <input type="text" name="numEQS" id="numEQS" />
+    </p>
+    <p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p class="cc">3. How many times have you voted in the last 10 years? 
+        <label>
+          <input type="text" name="numVote" id="numVote" />
+        </label>
+    </p>
+    <p class="cc">&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p class="cc">4. How many years have you been a registered voter?
+        <label>
+          <input type="text" name="numRegVote" id="numRegVote" />
+        </label>
+    </p>
+    <p class="cc">&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p class="cc">5. How many children do you have under the age of 18?   
+        <input type="text" name="numChild" id="numChild" />
+      </p>
+    <p class="cc">&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p class="cc">6. Rule of 53 - Check here if you have made enough money to pay income tax to the federal government?
+        <span id="sprycheckbox2">
+        <label>
+          <input type="checkbox" name="incomeTax" id="incomeTax" />
+        </label>
+        </span></p>
+      <p class="cc">&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td bgcolor="#0033FF"><p> <button onclick="calculateTotalVotes()">Calculate Total Votes</button></p>
+      <p>&nbsp;</p>
+      <p>Total Votes: 
+        <label>
+          <input type="text" name="numTotalVotes" id="numTotalVotes" />
+        </label>
+    </p></td>
+  </tr>
+</table>
+
+
+</body>
+</html>

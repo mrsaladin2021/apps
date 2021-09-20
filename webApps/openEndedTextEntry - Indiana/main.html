@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Homework Prompts</title>
+
+
+<style type="text/css">
+
+#questionArea
+{
+	text-align:center;
+	width:600px;
+	margin:0 auto;
+}
+
+#bg
+{
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:-1;
+}
+
+.questionBox
+{
+	width:550px;
+	height:100px;
+}
+
+.answerBox
+{
+	width:500px;
+	height:100px;
+}
+
+body {
+	background-image: url();
+	background-repeat: no-repeat;
+	background-color: #000;
+}
+</style>
+
+<script language="javascript" type="text/javascript">
+
+var questions = new Array();
+
+
+
+questions.push("ccvvvvbbnnnnS  ");
+
+
+
+/* END EDIT HERE */
+
+function createBoxes()
+{
+	var questionAreaRef = document.getElementById("questionArea");
+	
+	for(var i = 0; i < questions.length; i++)
+	{
+		var tempArea = document.createElement("textarea");
+		var answerBox = document.createElement("textArea");
+		
+		answerBox.setAttribute("id",i+"answer");
+		answerBox.setAttribute("name",i+"answer");
+		answerBox.setAttribute("class","answerBox");
+		
+		tempArea.value = questions[i];
+		tempArea.setAttribute("id",i+"question");
+		tempArea.setAttribute("name",i+"question");
+		tempArea.setAttribute("class","questionBox");
+		
+		var questionTitle = document.createElement("div");
+		questionTitle.innerHTML = "Question "+(i+1);
+		
+		questionAreaRef.appendChild(questionTitle);
+		questionAreaRef.appendChild(document.createElement("br"));
+		questionAreaRef.appendChild(tempArea);
+		questionAreaRef.appendChild(document.createElement("br"));
+		questionAreaRef.appendChild(answerBox);
+		questionAreaRef.appendChild(document.createElement("br"));
+		questionAreaRef.appendChild(document.createElement("br"));
+		questionAreaRef.appendChild(document.createElement("br"));
+		//questions[i]
+	}
+}
+
+
+</script>
+
+
+
+
+
+
+
+</head>
+
+<body onload="createBoxes()">
+
+<div id="bg">
+
+<div style="position:absolute; top:10%; width:100%; text-align:center">
+
+</div>
+<img src="backround.jpg" width="100%" height="100%" />
+</div>
+
+<form action="submitPage.php" method="post">
+
+&nbsp;&nbsp;&nbsp;<b>Student Name:</b> <input name="studentName" id="name" type="text"  />
+
+<center> <h2> Homework Prompts </h2> </center>
+
+
+<div id="questionArea">
+
+</div>
+<center> <input type="submit" /> </center>
+</form>
+
+
+
+</body>
+</html>

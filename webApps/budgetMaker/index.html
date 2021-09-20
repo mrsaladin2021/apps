@@ -1,0 +1,465 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mr Saladin's Budget Maker</title>
+
+<link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
+<link rel="icon" href="favicon.ico?" type="image/x-icon">
+
+<style>
+
+#gdp
+{
+	font-size:24px;
+	padding-top:15px;
+	margin-left:105px;
+	font-variant:small-caps;
+	font-weight:bold;
+	color:green;
+	float:left;
+}
+
+#debtRatio
+{
+	font-variant:small-caps;
+	font-weight:bold;
+	color:#F00;
+	font-size:22px;
+	padding-left:330px;
+	padding-top:15px;
+}
+#budgetOutlook
+{
+	width:1000px;
+	background:#CCC;
+	height:500px;
+	margin:0 auto;
+	border:#FF0 solid 10px;
+	margin-top:-13px;
+}
+
+#nationImage
+{
+	background:#F00;
+	width:500px;
+	height:333px;
+	float:left;
+	
+}
+#budgetPie
+{
+	background:#0F0;
+	width:500px;
+	height:333px;
+	float:left;
+}
+#nationImageDescription
+{
+	height:167px;
+	width:500px;
+	float:left;
+}
+#basicInfo
+{
+	background:#FC9;
+	width:500px;
+	height:167px;
+	float:left;
+}
+#budget
+{
+	margin:0 auto;
+	border:#FF0 solid 10px;
+	margin-top:-14px;
+	width:800px;
+	padding:5px;
+	background-image:url(greenStripes.jpg);
+	
+}
+.budgetTable
+{
+	border:3px solid #000; 
+	width:700px; 
+	margin-left:50px;
+	border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+	padding:5px;
+}
+.priceHeading
+{
+	color:red;
+}
+
+.priceBox
+{
+	width:100px;
+}
+.costCell
+{
+	text-align:center;
+}
+.categoryTitle
+{
+	font-size:25px; 
+	font-variant:small-caps; 
+	font-weight:bold;
+	
+}
+</style>
+
+<script language="javascript">
+
+const U  = 1 // unitless.
+const K  = 1000
+const M  = K * K;
+const B  = M * K;
+const T  = B * K;
+
+
+
+function BudgetCategory(name)
+{
+	this.name = name; 
+	
+	// Expense: [ name, description, cost, units,costBox,unitSelector]
+	// The cost is really the initial cost. TODO: change. 
+	this.expenses = new Array();
+	this.expenseTable;
+	this.categoryDiv;
+	this.totalOutSpan;
+	this.expenseByNameArray = new Array(); // Associative array. 
+	this.total = 0;
+	this.outDiv = document.createElement("div");
+	
+	this.createExpense = function( name, description, cost, units)
+	{
+		var expenseRow = document.createElement("tr");
+		
+		var unitSelector = document.createElement("select");
+		unitSelector.innerHTML = '<option value="1">no unit(U)</option><option value="1000">thousand (K)</option><option value="1000000">million (M)</option><option value="1000000000">billion (B)</option><option value="1000000000000">trillion (T)</option>';
+		unitSelector.value = units;
+		unitSelector.onchange= handleCostChanges;
+		
+		var costBox = document.createElement("input");
+		costBox.className = "priceBox"
+		costBox.value = cost;
+		costBox.onkeyup = handleCostChanges;
+		//("onclick",function(){alert("JJ")}, true );
+		
+	
+		
+		var costCell = document.createElement("td");
+		costCell.appendChild(costBox);
+		costCell.appendChild(unitSelector);
+		
+		
+		expenseRow.innerHTML = "<td>"+name+"</td>"+"<td>"+description+"</td>";
+		expenseRow.appendChild( costCell );
+		
+		// Add to main expense table. 
+		this.expenseTable.appendChild(expenseRow);
+		this.expenses.push( [ name, description, cost, units,costBox,unitSelector] );
+		
+		// New element, rebuild assoc array. May seem inefficent, but arrays are immutable, so this 
+		// happens behind the scenes anyway. At least I think so in javascript. Maybe not because it's a linked list.
+		// TODO: optimize. 
+		this.constructAssociativeArray();
+	}
+	
+	this.init = function()
+	{
+		// Title Div and out span
+		this.totalOutSpan = document.createElement("span");
+		this.totalOutSpan.className = "priceHeading";
+		this.categoryDiv = document.createElement("div");
+		this.categoryDiv.className = "categoryTitle"
+		
+		//Initilising the title div. 
+		this.categoryDiv.innerHTML = this.name + "[";
+		this.categoryDiv.appendChild( this.totalOutSpan );
+		var rightBrace = document.createElement("span");
+		rightBrace.innerHTML = "]";
+		this.categoryDiv.appendChild(rightBrace);
+		
+		
+		// Create Expense table
+		this.expenseTable = document.createElement("table");
+		this.expenseTable.className = "budgetTable";
+		
+		// Expense table headers
+		this.expenseTable.innerHTML = "<tr><th>Expendature</th><th>Description</th><th>Cost</th></tr>";
+		
+		//Compose out div.
+		this.outDiv.appendChild(this.categoryDiv);
+		this.outDiv.appendChild(this.expenseTable);
+		
+		
+	}
+	
+	this.render = function()
+	{
+		// Produces a div for this entire category. 
+		return this.outDiv;
+	}
+	
+	this.constructAssociativeArray = function()
+	{
+		var assocArray = new Array()
+		
+		for( var i = 0; i < this.expenses.length; i++ )
+		{
+			// Using the name as associative index
+			assocArray[this.expenses[i][0]] = this.expenses[i];
+		}
+		
+		this.expenseByNameArray = assocArray; 
+	}
+	
+	this.computeTotalAndDisplay = function()
+	{
+		this.totalOutSpan.innerHTML = "$";
+		
+		// Add up all the expenses and displaying it in the price heading. 
+		var total = 0;
+		for( var i = 0; i < this.expenses.length; i++ )
+		{
+			// Cost of expense times it's unit value. 
+			total += this.expenses[i][4].value * this.expenses[i][5].value;	
+			
+			
+		}
+		
+		this.totalOutSpan.innerHTML = this.bueautifyNumber(total);
+		this.total = total;
+	}
+	
+	this.getExpense = function( name )
+	{
+		// The 5'th element is the cost box. We multiply this by it's unit box to get the value. 
+		return this.expenseByNameArray[name][4].value  * this.expenseByNameArray[name][5].value  ;
+	}
+	
+	this.getExpenses = function()
+	{
+		return this.expenses;
+	}
+	
+	this.getTotal = function()
+	{
+		this.computeTotalAndDisplay();
+		return this.total;
+	}
+	
+	// Helper Functions
+	this.bueautifyNumber = function( num )
+	{
+		// Adds commas to large numbers to improve readability
+		// Source code from stackoverflow. 
+		return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	// Constructor call.
+	this.init();
+}
+
+function Budget()
+{
+	// The expense: [ name, description, cost, units,costBox,unitSelector]
+	this.categories = new Array();
+	
+	this.createCategory = function(name)
+	{
+		
+	}
+	
+	this.addCategory = function( category )
+	{
+		this.categories.push(category);
+	}
+	
+	/* Depreceated idea
+	this.assignID = function()
+	{
+		// We need to set up a smart event handler system.
+		for( var i = 0; i < this.categories.length; i++ )
+		{
+			// For exach expense in each category:
+			var expenses = this.categories[i].getExpenses();
+			
+			for( var j = 0; j < expenses.length; j++)
+			{
+				// Id of each expense "i_j_x" where x is either C or S for the cost or selection box. 
+				// We only care about accessing each cost box and associated unit box, the rest
+				// of the expense is static data. 
+				
+				expenses[i][4].id = i+"_"+j+"_C";
+				expenses[i][5].id = i+"_"+j+"_S"
+			}
+		}
+	}*/
+	
+	this.computeBudget = function()
+	{
+		for( var i = 0; i < this.categories.length; i++ )
+		{
+			// For each category, compute their totals. 
+			this.categories[i].computeTotalAndDisplay();
+		}
+	}
+	
+	this.render = function( parentDiv )
+	{
+		for( var i = 0; i < this.categories.length; i++ )
+		{
+			parentDiv.appendChild(this.categories[i].render());
+		}
+	}
+}
+
+//************************* EDIT AREA **************************************
+var newBudget = new Budget();
+
+// Create 
+var medCat = new BudgetCategory("Medical");
+var milCat = new BudgetCategory("Military");
+var eduCat = new BudgetCategory("Education");
+var welCat = new BudgetCategory("Welfare");
+var proCat = new BudgetCategory("Protection");
+var transCat = new BudgetCategory("Transportation");
+var genGov = new BudgetCategory("General Government");
+
+// Populate Categories
+medCat.createExpense("Medical Service","Medical provisions for seniors.",595.3, B );
+medCat.createExpense("Medical Service","Medical provisions for seniors.",595.3, B );
+
+/* EXAMPLE: 
+
+// Add expenses to categories
+medCat.createExpense("Medicine","All the medicine man.",1,T);
+medCat.createExpense("Staff","The medical staff.",2,T);
+medCat.createExpense("Insurance","Insurance agains malpractice.",1,B);
+
+milCat.createExpense("Guns","We have a lot of guns.",4,T);
+milCat.createExpense("Soldier Pay","We have a lot of soldiers",10,B);
+*/
+
+// Function in which you set the conditions for the naritive and picture for the budget. 
+function createBudgetStory()
+{
+	// ################ NO EDIT - CONTAINERS ###################################
+	//500 X 333
+	var nationImageDiv = document.getElementById("nationImage");
+	//500 X 167
+	var nationDescriptionDiv = document.getElementById("nationImageDescription");
+	// 495 X 162
+	var nationDescriptionTXT = document.getElementById("txtNationDescription");
+	
+	var nationImageBG = document.getElementById("nationImageBackground");
+	//####################### End Containers ###################################
+	
+	//################### NO EDIT - HELPER FUNCTIONS ##########################
+	function out( text )
+	{
+		nationDescriptionTXT.value += text;
+	}
+	function clearOut()
+	{
+		nationDescriptionTXT.value = "";
+	}
+	//#########################################################################
+	
+	clearOut(); // Clear output from previous generations. 
+	
+	// Here you will use the expence categories above in order to generate a
+	// nation image and description. The ouptut countaines are listed for you
+	// in the section above. 
+	// To access the cost of an expense: category.getExpense( name )
+	
+	/* Example
+	if( milCat.total > medCat.total )
+	{
+		out("You care more about the military than healing your people.");
+	}
+	else
+	{
+		out("You care more about healing your people than war. ");
+	}
+	
+	if( medCat.getExpense("Staff") > medCat.getExpense("Medicine") )
+	{
+		out("You spend more on medical staff than on medicinde.");
+	}
+	
+	if( medCat.getExpense("Insurance") < 2 * T )
+	{
+		out( "Also, your medical workers are underinsured. This could lead to less effective doctoring.");
+	}*/
+	
+}
+
+// Add categories to budget. 
+newBudget.addCategory( medCat );
+newBudget.addCategory( milCat );
+
+
+//************************* END EDIT AREA *********************************
+
+function handleCostChanges()
+{
+	newBudget.computeBudget();	
+	createBudgetStory();
+}
+
+</script>
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;">
+
+
+<div style="position:absolute; height:100%; width:100%; z-index:100; visibility:hidden; "><img src="outFallMoney.gif" style="width:100%; height:100%;"></div>
+
+<div><center><img src="mrsaladin.png" width="570" height="55"></center></div>
+
+<div style="overflow:hidden; position:relative; width:420px; height:100px; margin:0 auto;">
+	<iframe src="http://www.usdebtclock.org/" width="450" height="400" style="top:-120px; left:-15px; position:absolute; overflow:hidden;"></iframe>
+</div>
+
+<div style="width:420px; height:49px; margin:0 auto; background:url(gdpAndRatioBg.fw.png)"> 
+<!-- EDIT GDP and DEBT RATIO here !--->
+<div id="gdp">18.13</div>
+<div id="debtRatio">1.005%</div>
+<!--- END EDIT SECTION !-------------->
+</div>
+
+<div style="margin:0 auto; width:191px; margin-top:20px;border:#FF0 solid 10px; background:#999; padding:5px;">
+<img src="budgetOutlook.png" width="191" height="28"></div>
+
+<div id="budgetOutlook">
+    <div id="nationImage"><div><img id="nationImageBackground" src="happyPeople.jpg" width="500" height="333" /></div></div>
+    <div id="budgetPie"></div>
+    <div id="nationImageDescription"><textarea id="txtNationDescription" style="width:495px;height:162px;"></textarea></div>
+    <div id="basicInfo"></div>
+</div>
+
+<div style="margin:0 auto; width:248px;"><img src="moneyRoot.fw.png" width="248" height="129"></div>
+
+<div id="budget"></div>
+
+<br>
+
+<!-- Background image -->
+<div style="position:fixed; top:0px; height:100%; width:100%; z-index:-1; left:0px;"><img src="bg.jpg" style="width:100%; height:100%; overflow:hidden;"></div>
+
+<script language="javascript">
+
+handleCostChanges();
+newBudget.render(document.getElementById("budget") ); 
+</script>
+
+</body>
+</html>

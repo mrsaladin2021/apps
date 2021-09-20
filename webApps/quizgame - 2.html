@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Q&amp;A Practice</title>
+
+<style>
+
+#bgImg
+{
+	position:absolute;
+	height:100%;
+	width:100%;
+	top:0px;
+	left:0px;
+	z-index:-1;
+
+}
+
+</style>
+
+<script language="javascript" type="text/javascript">
+
+// Declaration of arrays. 
+var quotes = new Array();
+var authors = new Array();
+var quotesCopy = new Array();
+var numberAnswered = 0;
+
+// Population of arrays. EDIT HERE 
+
+
+quotes.push( "Plato shows us that the systematic use of reason can show us the best way to live.   A. True  B. False  " );
+authors.push("A");
+
+quotes.push( "Plato posits that the true understanding of human nature and its problems is the only way to achieve…  A. individual happiness and social stability.   B.  Nirvana   C. Great riches   D. Something " );
+authors.push("A");
+
+quotes.push( "Plato was as student of…   A. Aristotle   B. Alexander the Great   C. Socrates   D. Heraclitus " );
+authors.push("C");
+
+quotes.push( "Socrates claimed superiority over unthinking people because he started with the premise that he knew…  A. Everything     B.  Nothing   C.  Something " );
+authors.push("B");
+
+quotes.push( "The Socratic Paradox centers around the idea that nothing is actually something.   A. True   B. False " );
+authors.push("A");
+
+quotes.push( "Socrates acted with religious intensity to challenge people’s mental complacency.   A. True   B. False " );
+authors.push("A");
+
+quotes.push( "Socrates was relentless in challenging the integrity of politicians in Ancient _______________.  Quite often he would drive people to tears.    A. Rome  B. Persia  C.  Greece   D. Athens " );
+authors.push("D");
+
+quotes.push( "Seen as an annoyance by those in power, Socrates was accused of corruption of the young and worshiping false Gods.   His sentence was…. A. Exile  B. All you can eat buffet  C. Death  D. Imprisonment " );
+authors.push("C");
+
+quotes.push( " Socrates left nothing but it was Plato who kept him alive through his writing.  A. True  B. False" );
+authors.push("A");
+
+quotes.push( "Which of the following is not true about the Republic?  A.  It was written as a reaction to the unjust death of Socrates.  B.  It was a lengthy and complex analysis of an ideal human society.  C.  It was a dialogue  D.  It supports the idea of a democracy. " );
+authors.push("D");
+
+quotes.push( "The _____________ is chosen as the leader of the Republic.  He or she possesses the ability to see what others cannot.  Preparation for this position involves decades of rigorous education.  A. Guardian  B. President  C. Producer  D.  Philosopher King. " );
+authors.push("D");
+
+quotes.push( "The leaders of the Republic cannot own any property or have a family.  This is so they cannot be… A.  Happy  B. Sad  C. Corrupted  D. Enlightened." );
+authors.push("C");
+
+quotes.push( "The social stability of the Republic is held together by the noble lie.  A. True   B. False " );
+authors.push("A");
+
+quotes.push( " An important metaphysical aspect of Plato’s Theory of Forms states that our experience is more than material things in that the Form doesn’t decay or cease to exist. Material objects get damaged or destroyed but Forms transcend space and time.  A. True B. False" );
+authors.push("A");
+
+quotes.push( "Things that we perceive are a watered down, distant relation to the true Form.  A. True   B. False   " );
+authors.push("A");
+
+quotes.push( "According to Plato the composition of the soul is divided into three parts -   Spirit, Appetite and Reason.  A. True  B. False  " );
+authors.push("A");
+
+quotes.push( "According to Socrates,  the soul is immortal. It has been reborn many times and has true knowledge of the world of Forms.  The key for the thinking human being is to uncover this knowledge as its within him.   A. True B. False " );
+authors.push("A");
+
+quotes.push( " I am the wisest man alive for I know one thing  that is I know nothing.  A. Socrates B. Plato C. Aristotle" );
+authors.push("A");
+
+quotes.push( "I am not a citizen of Athens, I am not a citizen of Greece.  I am a citizen of the world.  A. Socrates B. Plato C. Aristotle        " );
+authors.push("A");
+
+quotes.push( "An unexamined life isn’t worth living.  A. Socrates  B.  Plato   C. Aristotle" );
+authors.push("A");
+
+quotes.push( "The highest form of human excellence is questioning oneself and others.  A. Socrates B. Plato C. Aristotle" );
+authors.push("A");
+
+
+
+
+// End Population of arrays. 
+
+var answers = new Array(quotes.length);
+
+quotesCopy = copyArray( quotes );
+
+
+var txtQuote;
+var txtAnswer;
+var currentQuoteIndex = null; 
+
+
+function onAnswer()
+{
+	// Verify that the quote matches the author. If they do match, a youtube clip will be shown 
+	// above the text area saying you win, if they do not match, a youtube clip will be show above
+	// the text area saying you lose. 
+	
+	answers[ currentQuoteIndex ] = document.getElementById("answer").value;
+	
+	numberAnswered++;
+	
+	if( numberAnswered == quotes.length )
+	{
+		// Pop up answer screen
+		showScoreScreen();
+	}
+	else
+	{
+		// Keep asking questions 
+		selectRandomQuote();
+	}
+
+	document.getElementById("answer").value = "";
+	
+}
+
+function showScoreScreen()
+{
+	document.getElementById("main").innerHTML = "";
+	var correctAnswers = 0;
+	
+	document.getElementById("main").style.fontSize = "25px";
+	document.getElementById("main").style.width = "600px;"
+	document.getElementById("main").style.marginLeft = "8%";
+	
+	for( var i = 0; i < quotes.length; i++)
+	{
+		var container = document.createElement("div");
+		var questionContainer = document.createElement("div");
+		var answerContainer = document.createElement("div");
+		
+		container.appendChild( questionContainer );
+		container.appendChild( answerContainer );
+		
+		container.style.textAlign = "left";
+		
+		questionContainer.innerHTML = "<span>"+(i+1)+".</span>";
+		
+		var questionTextBox = document.createElement("input");
+		questionTextBox.setAttribute("type","text");
+		questionTextBox.setAttribute("size","150");
+		questionTextBox.value = quotesCopy[i];
+		questionContainer.appendChild( questionTextBox );
+		
+		
+		
+		answerContainer.innerHTML = "<span>Answer: </span>";
+		
+		var answerTextBox = document.createElement("input");
+		answerTextBox.setAttribute("type","text");
+		answerTextBox.value = answers[i];
+		answerContainer.appendChild(answerTextBox);
+		
+		if( answers[i] == authors[i] )
+		{
+			// Answer correct.
+			answerTextBox.style.background = "#0F0";
+			correctAnswers++;
+		}
+		else
+		{
+			answerTextBox.style.background = "#F00";
+		}
+		
+		
+		document.getElementById("main").appendChild( container );
+		
+	}
+	
+	var score = document.createElement("div");
+	
+	score.innerHTML = "<div>"+correctAnswers+"/"+quotes.length+"</div>";
+	score.innerHTML += "<div>"+(correctAnswers/quotes.length)*100+"%</div>";
+	
+	document.getElementById("main").appendChild( score );
+}
+
+function copyArray( arry )
+{
+	var arryCopy = new Array();
+	
+	for( var i = 0; i < arry.length; i++)
+	{
+		arryCopy.push( arry[i] );
+	}
+	
+	return arryCopy;
+}
+
+function selectRandomQuote()
+{
+	// (quotes.length): largest number - 1
+	// + 0: smallest number. 
+	var randomNumber = Math.floor((Math.random()*(quotes.length) )+0);
+	
+	// Make sure all quotes have not been answered.
+	var allQuotesAnswered = true; 
+	
+	for( var i = 0; i < quotes.length; i++)
+	{
+		if( quotes[i] != "" )
+		{
+			allQuotesAnswered = false; 
+		}
+	}
+	
+	if( allQuotesAnswered )
+	{
+		quotes = copyArray( quotesCopy ); 
+	}
+	
+	
+	// Ensure that the random number generated is not a blank quote. 
+	var quoteFound = false; 
+	
+	while( !quoteFound )
+	{
+		if( quotes[ randomNumber ] != "" )
+		{
+			quoteFound  = true; 
+		}
+		else
+		{
+			randomNumber = (randomNumber + 1) % quotes.length ;
+		}
+	}
+	
+	// Gloabal reference to the index of the quote chosen. 
+	currentQuoteIndex = randomNumber; 
+	
+	// Assigning a quote chosen randomly by randomNumber. 
+	var chosenQuote = quotes[ randomNumber ];
+	
+	txtQuote.value = chosenQuote; 
+	
+	quotes[randomNumber] = "";
+	
+}
+
+function onLoad()
+{
+	// Get a random quote from the quote array and place it in the text area reffered to by txtQuote
+	// Also, we make the chosen quote blank so that it is not selected again. 
+	
+	txtQuote = document.getElementById("quote");
+	txtAnswer = document.getElementById("answer");
+
+	selectRandomQuote();
+}
+
+
+
+
+
+</script>
+
+
+</head>
+
+<body onload="onLoad()" >
+
+
+<center><h1>Q&A Practice</h1></center>
+
+<div id="main" style="width:400; margin:0 auto; text-align:center; margin-top:5%; color: #F00;">
+    <textarea cols="50" rows="5" id="quote"></textarea>
+    <br />
+    <input type="text" id="answer" /><br/>
+    <button onclick="onAnswer()">Answer</button>
+</div>
+
+
+
+</body>
+</html>

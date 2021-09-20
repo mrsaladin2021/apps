@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Put your title here</title>
+<style type="text/css">
+body {
+	background-color: #0FF;
+	font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+
+<body>
+<div style="font-size:36px; text-align:center; color: #FFF; font-weight: bold;">Video Picture Quiz</div>
+<!-- Change subtitle here -->
+<div style="font-size:20px; text-align:right; color: #FFF; font-weight: bold;">
+  
+</div>
+<div id="main" style="text-align:center; margin-top:10px; color:#FFF">
+</div>
+
+<div id="tries" style="position:absolute; top:0px; left:0px; width:50px; height:50px; background-color:#F00; font-size:45px; text-align:center;">
+5
+</div>
+
+<center><button onclick="onSubmit()">Submit</button></center>
+
+<script language="javascript" type="application/javascript">
+
+function onSubmit()
+{
+	var atLeastOneWrong = false;
+		
+	for( var i = 0; i < entryBoxes.length; i++)
+	{
+	
+		if( entryBoxes[i][0] == parseInt(entryBoxes[i][1].value) )
+		{
+			// Mark correct.
+			entryBoxes[i][1].style.backgroundColor = "#0F0";
+		}
+		else
+		{
+			entryBoxes[i][1].style.backgroundColor = "#F00";
+			atLeastOneWrong = true;
+		}
+	}
+	
+	if( atLeastOneWrong )
+	{
+		// Reduce tries. 
+		var newTries = parseInt( document.getElementById("tries").innerHTML ) - 1;
+		document.getElementById("tries").innerHTML = newTries;
+		
+		if( newTries == 0 )
+		{
+			// Fail.
+			document.body.innerHTML = "You lose!<br/><button onclick='javascript:location.reload(true)'>Retry</button>";
+		}
+	}
+	else
+	{
+		alert(" You win ");
+	}
+}
+
+function createEntryBox()
+{
+	var tmp = document.createElement("input");
+	tmp.setAttribute("type","text");
+	return tmp;
+}
+
+function makeLabel( val )
+{
+	var tmp = document.createElement("label");
+	tmp.innerHTML = val;
+	return tmp;
+}
+
+var numOrder = new Array();
+
+/** Enter the correct order here **/
+/* Example for correct order 3 , 20, 25, 27, 29, 30, 31, 44:
+ * numOrder.pushBack( 3 );
+ * numOrder.push( 20 );
+ */
+
+
+numOrder.push( 11 );
+numOrder.push( 1 );
+numOrder.push( 8 );
+numOrder.push(20);
+numOrder.push(7 );
+numOrder.push(2 );
+numOrder.push(15 );
+numOrder.push(16 );
+numOrder.push(14 );
+numOrder.push(3 );
+numOrder.push(10 );
+numOrder.push( 6);
+numOrder.push(4 );
+
+
+
+
+/***********************************/
+
+/** Set the number of default tries here **/
+
+document.getElementById("tries").innerHTML = 5;
+
+/***********************************/
+
+// [ valid value, entryEntity ]
+var entryBoxes = new Array();
+
+var mainBox = document.getElementById("main");
+
+// Create entry boxes. 
+for( var i = 0; i < numOrder.length; i++)
+{
+	var tmpEntry = createEntryBox();
+	var labelDiv = document.createElement("div");
+	
+	entryBoxes.push( [ numOrder[i] , tmpEntry ] );
+	
+	labelDiv.appendChild( makeLabel( i+1 ) );
+	
+	mainBox.appendChild( labelDiv );
+	
+	mainBox.appendChild( tmpEntry );
+	mainBox.appendChild( document.createElement("br") );
+}
+
+</script>
+
+<table width="100%" border="1">
+  <tr>
+    <td width="17%">  Esty (1 )</td>
+    <td width="23%">William and Mary (2 )</td>
+    <td width="30%"> Rousseau (3 )</td>
+    <td width="30%">Napoleon (4 )</td>
+  </tr>
+  <tr>
+    <td>Socrates (5 )</td>
+    <td>Machiavelli ( 6)</td>
+    <td>Henry VIII( 7)</td>
+    <td>Blumenthal (8 )</td>
+  </tr>
+  <tr>
+    <td>King John (9 )</td>
+    <td>Plato (10)</td>
+    <td>Sun Tzu (11 )</td>
+    <td>Martin Luther (12 )</td>
+  </tr>
+  <tr>
+    <td>Alexander (13 )</td>
+    <td>Robespierre (14)</td>
+    <td>Louis 16th (15 )</td>
+    <td>Marie Antoinette ( 16)</td>
+  </tr>
+  <tr>
+    <td>Locke (17 )</td>
+    <td>Hobbes (18 )</td>
+    <td>Jefferson (19)</td>
+    <td>Murphy (20)</td>
+  </tr>
+</table>
+</body>
+</html>

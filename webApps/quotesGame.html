@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Q&amp;A Practice</title>
+
+<style>
+
+#bgImg
+{
+	position:absolute;
+	height:100%;
+	width:100%;
+	top:0px;
+	left:0px;
+	z-index:-1;
+
+}
+
+</style>
+
+<script language="javascript" type="text/javascript">
+
+// Declaration of arrays. 
+var quotes = new Array();
+var authors = new Array();
+var quotesCopy = new Array();
+
+
+// Population of arrays. EDIT HERE 
+
+quotes.push( "This term means that we're all interconnected" );
+authors.push("globalization");
+
+quotes.push( "This term refers to sharing of ideas between different cultures." );
+authors.push("cultural diffusion");
+
+quotes.push( "This is a term that refers to a final and decisive step.  Its also a river in Italy. " );
+authors.push("The Rubicon");
+
+quotes.push( "This person advocated the use of might tempered by mercy. " );
+authors.push("Alexander the Great");
+
+quotes.push( " This Roman general committed a genocide in Gaul " );
+authors.push("Caesar");
+
+quotes.push( "This term means the spread of Greek Culture." );
+authors.push("Hellenism");
+
+quotes.push( " This is the term for 200 years of relative peace in the Roman Emperor" );
+authors.push("Pax Romana");
+
+quotes.push( "This person stated that injustice anywhere effects justice everywhere. " );
+authors.push("Martin Luther King");
+  
+quotes.push( "This person stated that our silence is our consent." );
+authors.push("Plato");
+
+quotes.push( "Plato constructed a utopian society by the name of _______________ " );
+authors.push("The Republic");
+
+quotes.push( "This person stated that the ends justify the means" );
+authors.push("Machiavelli");
+
+quotes.push( "This pope called for the 1st Crusade. " );
+authors.push("Urban");
+
+
+
+
+
+// End Population of arrays. 
+
+quotesCopy = copyArray( quotes );
+
+
+var txtQuote;
+var txtAnswer;
+var currentQuoteIndex = null; 
+
+
+function nextQuestion()
+{
+	// 1.) Remove the youtube clip. 
+	// 2.) Select a random quote, making sure not to select an empty quote. 
+	// 3.) Make selected quote blank. 
+	
+	document.getElementById("youtubeClip").innerHTML = "";
+	
+	selectRandomQuote();
+}
+
+function onAnswer()
+{
+	// Verify that the quote matches the author. If they do match, a youtube clip will be shown 
+	// above the text area saying you win, if they do not match, a youtube clip will be show above
+	// the text area saying you lose. 
+	
+	if( authors[ currentQuoteIndex ] == txtAnswer.value )
+	{
+		// The author of the quote matches the answer given by the user. CORRECT.
+		document.getElementById("youtubeClip").innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/kSBi5urUePc?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>'; 
+		
+	}
+	else
+	{
+		// The author of the quote does not match the answer given by the user. WRONG.
+		document.getElementById("youtubeClip").innerHTML = '<iframe width="560" height="315" src="http://www.youtube.com/embed/KOhvDmGEspw?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>';
+	}
+}
+
+function copyArray( arry )
+{
+	var arryCopy = new Array();
+	
+	for( var i = 0; i < arry.length; i++)
+	{
+		arryCopy.push( arry[i] );
+	}
+	
+	return arryCopy;
+}
+
+function selectRandomQuote()
+{
+	// (quotes.length): largest number - 1
+	// + 0: smallest number. 
+	var randomNumber = Math.floor((Math.random()*(quotes.length) )+0);
+	
+	// Make sure all quotes have not been answered.
+	var allQuotesAnswered = true; 
+	
+	for( var i = 0; i < quotes.length; i++)
+	{
+		if( quotes[i] != "" )
+		{
+			allQuotesAnswered = false; 
+		}
+	}
+	
+	if( allQuotesAnswered )
+	{
+		quotes = copyArray( quotesCopy ); 
+	}
+	
+	
+	// Ensure that the random number generated is not a blank quote. 
+	var quoteFound = false; 
+	
+	while( !quoteFound )
+	{
+		if( quotes[ randomNumber ] != "" )
+		{
+			quoteFound  = true; 
+		}
+		else
+		{
+			randomNumber = (randomNumber + 1) % quotes.length ;
+		}
+	}
+	
+	// Gloabal reference to the index of the quote chosen. 
+	currentQuoteIndex = randomNumber; 
+	
+	// Assigning a quote chosen randomly by randomNumber. 
+	var chosenQuote = quotes[ randomNumber ];
+	
+	txtQuote.value = chosenQuote; 
+	
+	quotes[randomNumber] = "";
+	
+}
+
+function onLoad()
+{
+	// Get a random quote from the quote array and place it in the text area reffered to by txtQuote
+	// Also, we make the chosen quote blank so that it is not selected again. 
+	
+	txtQuote = document.getElementById("quote");
+	txtAnswer = document.getElementById("answer");
+
+	selectRandomQuote();
+}
+
+
+
+
+
+</script>
+
+
+</head>
+
+<body onload="onLoad()" >
+
+<div id="bgImg"><img src="http://upload.wikimedia.org/wikipedia/commons/2/21/Eug%C3%A8ne_Delacroix_-_Liberty_Leading_the_People_%2828th_July_1830%29_-_WGA6177.jpg" width="100%" height="100%" /></div>
+
+<center><h1 style="color:#FFF;">Q&A Practice</h1></center>
+
+<div style="width:400; margin:0 auto; text-align:center; margin-top:5%;">
+<div id="youtubeClip"></div>
+    <textarea cols="50" rows="5" id="quote"></textarea>
+    <br />
+    <input type="text" id="answer" /><br/>
+    <button onclick="onAnswer()">Answer</button>
+    <button onclick="nextQuestion()">Next question</button>
+</div>
+
+
+
+</body>
+</html>

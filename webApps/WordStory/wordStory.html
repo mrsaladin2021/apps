@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mr. Saladin's: Card Story</title>
+<script type="text/javascript" src="js/dat.gui.js"></script>
+<link rel="stylesheet" type="text/css" href="style/style.css">
+
+<script type="text/javascript">
+
+// ############### EDIT ME ###########################
+var wordBank1 = [];
+var wordBank2 = [];
+var wordBank3 = [];
+
+var associatedImagePath = "img/associatedCardImages/";
+var associatedImages1 = [];
+var associatedImages2 = [];
+var associatedImages3 = [];
+//######################################################
+
+// We are going to use this random images for now. 
+function setRandomImages()
+{
+	var randomImagePath = "img/randomCardImages/";
+	var randomImages = ["bannanas.jpg","bear.jpg","bird.jpg","cone.jpg","dots.jpg","gumBalls.jpg","swirl.jpg","tiger.jpg"];
+	var indexOfRandom = [];
+	
+	// Find three different random numbers
+	while(indexOfRandom.length < 3)
+	{
+		var randomImage = Math.floor(Math.random() * randomImages.length );
+		var found = false; 
+		
+		for(var i = 0; i < indexOfRandom.length; i++)
+		{
+			if( indexOfRandom[i] == randomImage )
+			{
+				found = true;
+			}
+		}
+		
+		if(!found)
+		{
+			indexOfRandom.push(randomImage);
+		}
+	}
+	
+	document.getElementById("faceImage1")
+	.setAttribute("src",randomImagePath+randomImages[indexOfRandom[0]]);
+	
+	document.getElementById("faceImage2")
+	.setAttribute("src",randomImagePath+randomImages[indexOfRandom[1]]);
+	
+	document.getElementById("faceImage3")
+	.setAttribute("src",randomImagePath+randomImages[indexOfRandom[2]]);
+}
+
+function makeStory()
+{
+	// Cange this when we have associated images. 
+	if( associatedImages1.length == 0 )
+	{
+		setRandomImages();
+	}
+	
+	var rand1 = Math.floor( (Math.random() * wordBank1.length ) + 0 );
+	var rand2 = Math.floor( (Math.random() * wordBank2.length ) + 0 );
+	var rand3 = Math.floor( (Math.random() * wordBank3.length ) + 0 );
+	
+	var randWord1 = wordBank1[rand1];
+	var randWord2 = wordBank2[rand2];
+	var randWord3 = wordBank3[rand3];
+	
+	document.getElementById("text1").innerHTML = randWord1;
+	document.getElementById("text2").innerHTML = randWord2;
+	document.getElementById("text3").innerHTML = randWord3;
+	
+	document.getElementById("faceImage1")
+	.setAttribute("src",associatedImagePath+associatedImages1[rand1]);
+	
+	document.getElementById("faceImage2")
+	.setAttribute("src",associatedImagePath+associatedImages2[rand2]);
+	
+	document.getElementById("faceImage3")
+	.setAttribute("src",associatedImagePath+associatedImages3[rand3]);
+	
+}
+
+
+
+</script>
+
+</head>
+
+<body onload="setRandomImages()">
+<!-- A card image face is: 295X247=wxh !-->
+
+<div id="mainContainer">
+
+<div id="titleImage">
+	<img src="img/title.fw.png" width="576" height="221" />
+</div>
+
+<div onclick="makeStory()" id="makeStoryFrame">
+	<img src="img/makeButton.fw.png" width="200" height="40" />
+</div>
+
+<div id="cards">
+    <div id="card1">
+        <div id="face1">
+            <img id="faceImage1" src="img/randomCardImages/tiger.jpg" width="295" height="247" /> 
+        </div>
+        <div class="textFieldFrame" >
+        	<div class="textField" id="text1">Make a Story</div>
+        </div>
+       
+        <img src="img/finalCardBack.fw.png" width="322" height="453" />
+    </div>
+    
+    <div id="card2">
+        <div id="face2">
+            <img id="faceImage2" src="img/randomCardImages/tiger.jpg" width="295" height="247" /> 
+        </div>
+         <div class="textFieldFrame" >
+        	<div class="textField" id="text2">Make a Story</div>
+        </div>
+       
+        <img src="img/finalCardBack.fw.png" width="322" height="453" />
+    </div>
+    
+    <div id="card3">
+        <div id="face3">
+            <img id="faceImage3" src="img/randomCardImages/tiger.jpg" width="295" height="247" /> 
+        </div>
+         <div class="textFieldFrame" >
+        	<div class="textField" id="text3">Make a Story</div>
+        </div>
+       
+        <img src="img/finalCardBack.fw.png" width="322" height="453" />
+    </div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+// Define Dat.Gui menu. 
+
+var Cards = function() {
+  this.message = 'dat.gui';
+  this.speed = 0.8;
+  this.displayOutline = false;
+};
+
+window.onload = function() {
+  var cards = new Cards();
+  var gui = new dat.GUI();
+  gui.add(cards, 'message');
+  
+  var c1 = gui.addFolder('Card Group 1');
+  c1.addFolder("Card 1");
+  var c2 = gui.addFolder('Card Group 2');
+  var c2 = gui.addFolder('Card Group 3');
+  
+  var obj = { add:function(){ console.log("clicked") }};
+  gui.add(obj,'add');
+
+};
+</script>
+
+</body>
+</html>

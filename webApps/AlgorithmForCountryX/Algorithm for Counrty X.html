@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+body {
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	background: #666666;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+	background-color: #00F;
+}
+.oneColLiqCtrHdr #container {
+	width: 80%;  /* this will create a container 80% of the browser width */
+	background: #FFFFFF;
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	border: 1px solid #000000;
+	text-align: left; /* this overrides the text-align: center on the body element. */
+}
+.oneColLiqCtrHdr #header {
+	background: #DDDDDD; 
+	padding: 0 10px 0 20px;  /* this padding matches the left alignment of the elements in the divs that appear beneath it. If an image is used in the #header instead of text, you may want to remove the padding. */
+}
+.oneColLiqCtrHdr #header h1 {
+	margin: 0; /* zeroing the margin of the last element in the #header div will avoid margin collapse - an unexplainable space between divs. If the div has a border around it, this is not necessary as that also avoids the margin collapse */
+	padding: 10px 0; /* using padding instead of margin will allow you to keep the element away from the edges of the div */
+	font-size: 130%;
+	text-align: center;
+}
+.oneColLiqCtrHdr #mainContent {
+	padding: 0 20px; /* remember that padding is the space inside the div box and margin is the space outside the div box */
+	background: #FFFFFF;
+	color: #00F;
+}
+.oneColLiqCtrHdr #footer { 
+	padding: 0 10px; /* this padding matches the left alignment of the elements in the divs that appear above it. */
+	background:#DDDDDD;
+} 
+.oneColLiqCtrHdr #footer p {
+	margin: 0; /* zeroing the margins of the first element in the footer will avoid the possibility of margin collapse - a space between divs */
+	padding: 10px 0; /* padding on this element will create space, just as the the margin would have, without the margin collapse issue */
+}
+.oneColLiqCtrHdr #container #mainContent h1 {
+	font-size: 36%;
+}
+.oneColLiqCtrHdr #container #mainContent h1 {
+	font-size: larger;
+}
+.oneColLiqCtrHdr #container #mainContent table {
+	color: #FFF;
+}
+.oneColLiqCtrHdr #container #mainContent table tr td h1 {
+	color: #00F;
+}
+-->
+</style>
+
+<script language="javascript" type="text/javascript">
+
+function computeRawScore()
+{
+	var inputLengths = new Array();
+	var numRawData = document.getElementById("numRawData");
+	var points = 0;
+
+	var textFields = document.getElementsByTagName("input");
+	
+	for( var i = 1; i < textFields.length - 2; i++)
+	{
+		if( textFields[i].type == "text" && textFields[i].value.length > 0)
+		{
+			points += 20; 
+		}
+	}
+	
+	var textAreas = document.getElementsByTagName("textarea");
+	
+	for( var i = 1; i < textAreas.length; i++)
+	{
+		if(textAreas[i].value.length > 0 && textAreas[i].value.length < 50)
+		{
+			points += 20; 
+		}
+		else if( textAreas[i].value.length >= 50 )
+		{
+			points += 50;
+		}
+	}
+	
+	numRawData.value = points;
+					  
+	/*
+	var txtPoliticalSystem =document.getElementById("txtPoliticalSystem").value.length;
+	var txtPoliticalExplan = document.getElementById("txtPoliticalExplan").value.length;
+	var txtEconomicSystem = document.getElementById("txtEconomicSystem").value.length;
+	var txtEconomicExplan = document.getElementById("txtEconomicExplan").value.length;
+	var txtCountryY = document.getElementById("txtCountryY").value.length;
+	var txtMilitary = document.getElementById("txtMilitary").value.length;
+	var txtReligFreedom = document.getElementById("txtReligFreedom").value.length;
+	var txtIndivRights =document.getElementById("txtIndivRights").value.length;
+	var txtEducation = document.getElementById("txtEducation").value.length;
+	var  txtMitigateTensions = document.getElementById("txtMitigateTensions").value.length;
+	var  txtEmpiricalData1 = document.getElementById("txtEmpiricalData1").value.length;
+	var  txtEmpiricalData2 = document.getElementById("txtEmpiricalData2").value.length;
+	var  txtEmpiricalData3 = document.getElementById("txtEmpiricalData3").value.length;
+	var  txtEmpiricalData4 = document.getElementById("txtEmpiricalData4").value.length;
+	var  txtEmpiricalData5 = document.getElementById("txtEmpiricalData5").value.length;
+	var  txtnumYearsStability =document.getElementById("numYearsStability").value.length;*/
+
+
+}
+</script>
+
+</head>
+
+<body class="oneColLiqCtrHdr">
+
+<div id="container">
+<form action="scorePage.php" method="post">
+  <div id="header">
+    <h1>Algorithm for Political and Social Stability in Country X</h1>
+  <!-- end #header --></div>
+  <div align="center" id="mainContent">
+
+    <table width="711" border="1">
+      <tr>
+        <td width="701"><h1>Please provide a basic overview of your analysis and the algorithm will partially evaluate the effectiveness of your group's  plan and rank them accordingly. The equation does not include the credibility points for the presentation and participation which represents a overwhelming majority of the points. </h1>
+          <h1>Please remember that this is an impossible problem that not even the brightest minds in the world can figure out. The purpose of this assigment is to challenge your ability to think critically,  use evidence and defend your position persuasively. The only way that you can fail this exercise is if you put forth no effort or give up. Do your best - that is all I ask. </h1>
+          <blockquote>
+            <h1> This assignment is worth 30 Points </h1>
+            <h1>Submission Deadlines: </h1>
+            <h1>All classes will need to submit plans  by Friday, September 20th at 11:59 PM. </h1>
+<h1>Socratic presentations for Country X will begin on Monday, September 23rd and 24th.  Check this website for further details.</h1>
+          </blockquote>
+          <p>ThRerfrMRe</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000CC">&nbsp;</td>
+      </tr>
+    </table>
+    <table width="712" height="184" border="1">
+      <tr>
+        <td width="702" height="49" bgcolor="#0000CC">Class Period 
+          <label>
+            <input type="text" name="numClassPeriod" id="txtClassPeriod" />
+        </label></td>
+      </tr>
+      <tr>
+        <td height="22" bgcolor="#0000CC"><p>Names of group members. Please include full names and a comma between each name.</p>
+          <p>
+            <textarea name="txtGroupMembers " id="txtGroupMembers " cols="45" rows="5"></textarea>
+          </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000CC"><p>Provide the basic political system that will be implemented in Country X.
+          </p>
+          <p>
+            <label>
+              <input type="text" name="txtPoliticalSystem" id="txtPoliticalSystem" />
+            </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000CC"><p>Briefly explain how this political system will work. </p>
+        <p>
+          <label>
+            <textarea maxlength="100" name="txtPoliticalExplan" id="txtPoliticalExplan" cols="45" rows="5"></textarea>
+          </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000CC"><p>Provide the basic economic system that will be implemented in Country X.</p>
+        <p>
+          <label>
+            <input type="text" name="txtEconomicSystem" id="txtEconomicSystem" />
+          </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000CC"><p>Briefly explain how this economic system will evolve/grow. 
+            </p>
+          <p>
+            <label>
+              <textarea name="txtEconomicExplan" id="txtEconomicExplan" cols="45" rows="5"></textarea>
+              <br />
+              <br />
+            </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000CC"><p>Describe the extent of your relationship with Country Y - meaning how will you interact or not interact with them as you move forward?
+          </p>
+          <p>
+            <label>
+              <textarea name="txtCountryY" id="txtCountryY" cols="45" rows="5"></textarea>
+              <br />
+              <br />
+            </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>What percentage of your country's economic budget will be spent on the military over the next 10 years? 
+          </p>
+          <p>
+            <label>
+              <input type="text" name="txtMilitary" id="txtMilitary" />
+            </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>What is your policy towards religious freedom?</p>
+          <p>
+  <label>
+    <textarea name="txtReligFreedom" id="txtReligFreedom" cols="45" rows="5"></textarea>
+  </label>
+        </p>
+        <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>What is your policy towards other individual rights (i.e. freedom of expression)? Please explain?</p>
+          <p>.
+  <label>
+    <textarea name="txtIndivRights" id="txtIndivRights" cols="45" rows="5"></textarea>
+  </label>
+          </p>
+<p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>What percentage of your government's budget will be spent on education? 
+          </p>
+          <p>
+            <label>
+              <input type="text" name="txtEducation" id="txtEducation" />
+            </label>
+        </p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>How do you mitigate the ethnic tensions?</p>
+          <p>
+  <label>
+    <textarea name="txtMitigateTensions" id="txtMitigateTensions" cols="45" rows="5"></textarea>
+  </label>
+        </p>
+        <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>List the empirical data (historical evidence) that you provide in the defense of your solution. Please note that you don't have to fill in all of the boxes with examples. Whatever empirical data you use to support your position please list it here (i.e. Delian League, democracy in the US or Hitler's economic program in Germany)</p>
+        <p>
+          <label>
+            <input type="text" name="txtEmpiricalData1" id="txtEmpiricalData1" />
+          </label>
+          </p>
+        <p>
+          <label>
+            <input type="text" name="txtEmpiricalData2" id="txtEmpiricalData2" />
+          </label>
+          </p>
+        <p>
+          <label>
+            <input type="text" name="txtEmpiricalData3" id="txtEmpiricalData3" />
+          </label>
+          </p>
+        <p>
+          <label>
+            <input type="text" name="txtEmpiricalData4" id="txtEmpiricalData4" />
+          </label>
+          </p>
+        <p>
+          <label>
+            <input type="text" name="txtEmpiricalData5" id="txtEmpiricalData5" />
+          </label>
+        </p>
+        <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#0000FF"><p>In terms of years, how much time will it take to achieve social and political stability.</p>
+          <p>
+  <label>
+    <input type="text" name="numYearsStability" id="numYearsStability" />
+  </label>
+        </p>
+        <p>&nbsp;</p></td>
+      </tr>
+ 
+    </table>
+    <p>
+     <input type="hidden" name="numRawData" id="numRawData" />
+      <label>
+        <input onclick="computeRawScore()" type="submit" name="submit" id="submit" value="Submit" />
+      </label>
+    </p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  <!-- end #mainContent --></div>
+  </form>
+  <div id="footer">
+    <p>Footer</p>
+  <!-- end #footer --></div>
+<!-- end #container --></div>
+</body>
+</html>

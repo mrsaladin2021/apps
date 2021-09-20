@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mr Saladin's Budget Maker</title>
+
+<link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
+<link rel="icon" href="favicon.ico?" type="image/x-icon">
+
+<style>
+
+#gdp
+{
+	font-size:24px;
+	padding-top:15px;
+	margin-left:105px;
+	font-variant:small-caps;
+	font-weight:bold;
+	color:green;
+	float:left;
+}
+
+#debtRatio
+{
+	font-variant:small-caps;
+	font-weight:bold;
+	color:#F00;
+	font-size:22px;
+	padding-left:330px;
+	padding-top:15px;
+}
+#budgetOutlook
+{
+	width:1000px;
+	background:#CCC;
+	height:500px;
+	margin:0 auto;
+	border:#FF0 solid 10px;
+	margin-top:-13px;
+}
+
+#nationImage
+{
+	background:#F00;
+	width:500px;
+	height:333px;
+	float:left;
+	
+}
+#budgetPie
+{
+	background:#0F0;
+	width:500px;
+	height:333px;
+	float:left;
+}
+#nationImageDescription
+{
+	height:167px;
+	width:500px;
+	float:left;
+}
+#basicInfo
+{
+	background:#FC9;
+	width:500px;
+	height:167px;
+	float:left;
+}
+#budget
+{
+	margin:0 auto;
+	border:#FF0 solid 10px;
+	margin-top:-14px;
+	width:800px;
+	padding:5px;
+	background-image:url(greenStripes.jpg);
+	
+}
+
+table, th, td {
+    border: 1px solid black;
+	padding:5px;
+}
+.priceHeading
+{
+	color:red;
+}
+
+.priceBox
+{
+	width:100px;
+}
+.costCell
+{
+	text-align:center;
+}
+</style>
+</head>
+
+<body style="margin:0px 0px 0px 0px;">
+
+
+<div style="position:absolute; height:100%; width:100%; z-index:100; visibility:hidden; "><img src="outFallMoney.gif" style="width:100%; height:100%;"></div>
+
+<div><center><img src="mrsaladin.png" width="570" height="55"></center></div>
+
+<div style="overflow:hidden; position:relative; width:420px; height:100px; margin:0 auto;">
+	<iframe src="http://www.usdebtclock.org/" width="450" height="400" style="top:-120px; left:-15px; position:absolute; overflow:hidden;"></iframe>
+</div>
+
+<div style="width:420px; height:49px; margin:0 auto; background:url(gdpAndRatioBg.fw.png)"> 
+<!-- EDIT GDP and DEBT RATIO here !--->
+<div id="gdp">18.13</div>
+<div id="debtRatio">1.005%</div>
+<!--- END EDIT SECTION !-------------->
+</div>
+
+<div style="margin:0 auto; width:191px; margin-top:20px;border:#FF0 solid 10px; background:#999; padding:5px;">
+<img src="budgetOutlook.png" width="191" height="28"></div>
+
+<div id="budgetOutlook">
+    <div id="nationImage"></div>
+    <div id="budgetPie"></div>
+    <div id="nationImageDescription"><textarea style="width:495px;height:162px;"></textarea></div>
+    <div id="basicInfo"></div>
+</div>
+
+<div style="margin:0 auto; width:248px;"><img src="moneyRoot.fw.png" width="248" height="129"></div>
+
+<div id="budget">
+
+    
+    <div style="font-size:25px; font-variant:small-caps; font-weight:bold;">Military[<span class="priceHeading">$500</span>]</div>
+    <div>
+      <table style="border:3px solid #000; width:700px; margin-left:50px;border-collapse: collapse;">
+      <tr></tr>
+      <tr>
+        <th>Expendature</th>
+        <th>Description</th>
+        <th>Cost</th>
+      </tr>
+      <tr>
+        <td>Military</td>
+        <td>The sum total of arms</td>
+        <td class="costCell"><input type="text" class="priceBox" /><select name="units" size="1">
+          <option value="1000000">million (M)</option>
+          <option value="1000000000">billion (B)</option>
+          <option value="1000000000000">trillion (T)</option>
+        </select></td>
+      </tr>
+      </table>
+
+	</div>
+</div>
+<br>
+
+<div style="position:fixed; top:0px; height:100%; width:100%; z-index:-1; left:0px;"><img src="bg.jpg" style="width:100%; height:100%; overflow:hidden;"></div>
+
+
+</body>
+</html>

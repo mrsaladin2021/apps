@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0050)http://mrsaladin.net/webApps/quizgame%20-%202.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Q&amp;A Practice</title>
+
+<style>
+
+#bgImg
+{
+	position:fixed;
+	height:100%;
+	width:100%;
+	top:0px;
+	left:0px;
+	z-index:-1;
+
+}
+
+#multiMediaFrame
+{
+	margin:0 auto;
+	text-align:center;
+}
+
+</style>
+
+<script language="javascript" type="text/javascript">
+
+// Declaration of arrays. 
+
+// Questions
+var quotes = new Array();
+// Answers
+var authors = new Array();
+// Multimedia. 
+var multimedia = new Array();
+
+var quotesCopy = new Array();
+var numberAnswered = 0;
+
+// Population of arrays. EDIT HERE 
+// Rule 1: Use full paths to images or youtube videos. 
+
+//quotes.push( "Plato shows us that the systematic use of reason can show us the best way to live.   A. True  B. False  " );
+//authors.push("A");
+//multimedia.push(null);
+
+//quotes.push( "Who is this band? A. Prince   B. Nirvana   C. Great riches   D. Abba " );
+//authors.push("D");
+//multimedia.push("https://www.youtube.com/embed/RVAef8T7ewA");
+
+//quotes.push("How hard is _____ going to drop his mixtape? A. Socrates B. Plato C. Areostotle D. Mr. Saladin");
+//authors.push("B"); 
+//multimedia.push("http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2011/8/18/1313700219097/Marble-statue-of-the-anci-007.jpg");
+
+//quotes.push("How hard was this cat memed A. Hard B. Hard");
+//authors.push("A");
+//multimedia.push("https://www.youtube.com/embed/sG23dkD450A");
+
+//quotes.push("The painting shows a panorama of an army of skeletons wreaking havoc across a blackened, desolate landscape. Fires burn in the distance, and the sea is littered with shipwrecks. People are herded into a trap decorated with crosses, while a skeleton on horseback kills people with a scythe. The painting depicts people of different social backgrounds – from peasants and soldiers to nobles as well as a king and a cardinal – being taken by death indiscriminately");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/Bruegels-Thetriumphofdeath.jpg");
+
+//quotes.push("The Creation of Adam is a fresco painting by Michelangelo, which forms part of the Sistine Chapel's ceiling, painted circa 1511–1512. It illustrates the Biblical creation narrative from the Book of Genesis in which God breathes life into Adam, the first man. The fresco is part of a complex iconographic scheme and is chronologically the fourth in the series of panels depicting episodes from Genesis");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/Sistine_Chapel.png");
+
+//quotes.push("The School of Athens, or Scuola di Atene in Italian, is one of the most famous frescoes by the Italian Renaissance artist Raphael. It was painted between 1509 and 1511 as a part of Raphael's commission to decorate with frescoes the rooms now known as the Stanze di Raffaello, in the Apostolic Palace in the Vatican.  ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/school of athens by Raphael.jpg");
+
+//quotes.push("The Mona Lisa is a half-length portrait of a woman by the Italian artist Leonardo da Vinci, which has been acclaimed as the best known, the most visited, the most written about, the most sung about, the most parodied work of art in the world ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/Mona_Lisa.jpg");
+
+//quotes.push("Artist's Shit  is a 1961 artwork by the Italian artist Piero Manzoni. The work consists of 90 tin cans, filled with feces, each 30 grams with a label in Italian, English, French, and German. Manzoni produced works that explored the relationship between art production and human production, Artist's Breath a series of balloons filled with his own breath, being an example. Manzoni's father, who owned a cannery, is said to have once told his artist son, Your work is shit. ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/artists shit.jpg");
+
+//quotes.push("Fountain is a 1917 work widely attributed to Marcel Duchamp. The scandalous work was a porcelain urinal, which was signed R.Mutt and titled Fountain. Submitted for the exhibition of the Society of Independent Artists in 1917, Fountain was rejected by the committee, even though the rules stated that all works would be accepted from artists who paid the fee. Duchamp did not select just any ready-made object to display. In selecting the urinal, his message was clear: Art is something you piss on ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/urinal.jpg");
+
+quotes.push("Tony looks great!  His fitness and healthy eating habits have paid off.  As a result, he has lots of new opportunities for romance. In fact, he has gone on a lot of dates but he still feels like he needs to look even better.  So as a result, he loses more weight builds more muscle and even gets a butt implant - so he looks better in jeans.   It works - and he now is even more attractive.  He now attracts women and men with super model good looks.  His dating life is even more fantastic than before!  However, he thinks he can look better so he decides to get surgery to sculpt his abs.  He continues to shift his standards upward once he has reached them in some sort of hedonic adaptation ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/abs.jpg");
+
+quotes.push ("Kyle is in love with his girlfriend but after dating for a year she has lost interest.  His love is deep and abiding and though she cares about Kyle – she just isn’t that into him.   ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/odd couple.JPG");
+
+quotes.push ("Christina does everything right.  She follows the rules and is polite and kind to her friends.  She works hard in school because her parent’s expectations are high. She is a star basketball player and her coaches applaud her work ethic.  She is eager to please and her teachers adore her as she is a kind and supportive classmate.  She plans on following in her mother’s footsteps and attending medical school.  ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/harvard girl.jpg");
+
+quotes.push ("Trevor is morbidly obese.  He has been this way for his entire life.  He has an insatiable appetite for food and his attempts to diet have only scored moderate results.  He asks Plato if he looks good in his new shirt.  ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/morbid obesity.jpg");
+
+quotes.push ("Rachel raises her hand in class, tries to make interesting and insightful comments during literature circles, yet she never reads the text.  Moreover, she writes English papers full of cogent analysis but she doesn’t believe most of it – she is just trying to meet the 5 page minimum.  She is kind to her teachers, friends and even distant acquaintances – routinely asking how they are feeling and what they are doing.   She is very concerned about how others perceive her.   ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/eager to please student.jpg");
+
+quotes.push ("Chris loves his life.  He enjoys wrestling with his friends, eats at his favorite restaurant (Chile’s) on a regular basis and makes a good living as a driver for the UPS.  He is also a proud American who loves his country.  He supports the Republican Party and everything that it stands for.  His mother and father are both conservative and all of his friends, most of whom are unemployed, were raised and live in Crested Butte, one of the poorest towns in Mississippi. All share the same beliefs. ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/trailer park.jpg");
+
+
+
+//quotes.push("Coluccio Salutati was a Tuscan humanist and man of letters, and one of the most important political and cultural leaders of Renaissance Florence; as chancellor of the Republic and its most prominent voice, he was effectively the permanent secretary of state in the generation before the rise of the Medici. ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/Salutati.jpg");
+
+//quotes.push ("David is a masterpiece of Renaissance sculpture");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/Michelangelo.jpg");
+
+//quotes.push ("This early Medieval mosaic is the work of an artisan from Constantinople. Itinerant artisans skilled in mosaic came from Byzantium to work all over Western Europe. Their forceful, colourful, effulgent images of religious and decorative subjects contributed a major visual vocabulary for medieval and later artists to draw upon. ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/Jesus.jpg");
+
+//quotes.push ("Floorburger  Paint Collection Art Gallery of Ontario, Toronto.  ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/hamburger moma.jpg");
+
+//quotes.push ("Floorburger  Paint Collection Art Gallery of Ontario, Toronto.  ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/hamburger moma.jpg");
+
+//quotes.push ("Art exhibitions without exhibits are nothing new. Nothing has been a recognised art form for half a century. But the Centre Georges Pompidou in Paris can claim a cultural first this week: a retrospective exhibition of 51 years of exhibitions without exhibits by nine different artists. The exhibition, Voids, a Retrospective, fills, or fails to fill, five rooms in the French national museum of modern art on the fourth floor of the Pompidou building. All the rooms are entirely empty. The walls are white. ");
+//authors.push("A");
+//multimedia.push("http://www.mrsaladin.net/images/art as nothing.jpg");
+
+quotes.push (" Untitled (1961) by Mark Rothko sold for 28 MILLION DOLLARS ");
+authors.push("A");
+multimedia.push("http://www.mrsaladin.net/images/ROTHKO 28 MILL.jpg");
+
+// End Population of arrays. 
+
+var answers = new Array(quotes.length);
+
+quotesCopy = copyArray( quotes );
+
+
+var txtQuote;
+var txtAnswer;
+var currentQuoteIndex = null; 
+
+
+function onAnswer()
+{
+	// Verify that the quote matches the author. If they do match, a youtube clip will be shown 
+	// above the text area saying you win, if they do not match, a youtube clip will be show above
+	// the text area saying you lose. 
+	
+	answers[ currentQuoteIndex ] = document.getElementById("answer").value;
+	
+	numberAnswered++;
+	
+	// Clear multimedia frame
+	document.getElementById("multiMediaFrame").innerHTML = "";
+		
+	if( numberAnswered == quotes.length )
+	{
+		// Pop up answer screen
+		showScoreScreen();
+	}
+	else
+	{
+		// Keep asking questions 
+		var currQuoteIndex = selectRandomQuote();
+		
+	}
+
+	document.getElementById("answer").value = "";
+	
+}
+
+function showScoreScreen()
+{
+	document.getElementById("main").innerHTML = "";
+	var correctAnswers = 0;
+	
+	document.getElementById("main").style.fontSize = "25px";
+	document.getElementById("main").style.width = "600px;"
+	document.getElementById("main").style.marginLeft = "8%";
+	
+	for( var i = 0; i < quotes.length; i++)
+	{
+		var container = document.createElement("div");
+		var questionContainer = document.createElement("div");
+		var answerContainer = document.createElement("div");
+		
+		container.appendChild( questionContainer );
+		container.appendChild( answerContainer );
+		
+		container.style.textAlign = "left";
+		
+		questionContainer.innerHTML = "<span>"+(i+1)+".</span>";
+		
+		var questionTextBox = document.createElement("input");
+		questionTextBox.setAttribute("type","text");
+		questionTextBox.setAttribute("size","150");
+		questionTextBox.value = quotesCopy[i];
+		questionContainer.appendChild( questionTextBox );
+		
+		
+		
+		answerContainer.innerHTML = "<span>Answer: </span>";
+		
+		var answerTextBox = document.createElement("input");
+		answerTextBox.setAttribute("type","text");
+		answerTextBox.value = answers[i];
+		answerContainer.appendChild(answerTextBox);
+		
+		if( answers[i] == authors[i] )
+		{
+			// Answer correct.
+			answerTextBox.style.background = "#0F0";
+			correctAnswers++;
+		}
+		else
+		{
+			answerTextBox.style.background = "#F00";
+		}
+		
+		
+		document.getElementById("main").appendChild( container );
+		
+	}
+	
+	var score = document.createElement("div");
+	
+	score.innerHTML = "<div>"+correctAnswers+"/"+quotes.length+"</div>";
+	score.innerHTML += "<div>"+(correctAnswers/quotes.length)*100+"%<\/div>";
+	
+	document.getElementById("main").appendChild( score );
+}
+
+function copyArray( arry )
+{
+	var arryCopy = new Array();
+	
+	for( var i = 0; i < arry.length; i++)
+	{
+		arryCopy.push( arry[i] );
+	}
+	
+	return arryCopy;
+}
+
+function selectRandomQuote()
+{
+	// (quotes.length): largest number - 1
+	// + 0: smallest number. 
+	var randomNumber = Math.floor((Math.random()*(quotes.length) )+0);
+	
+	// Make sure all quotes have not been answered.
+	var allQuotesAnswered = true; 
+	
+	for( var i = 0; i < quotes.length; i++)
+	{
+		if( quotes[i] != "" )
+		{
+			allQuotesAnswered = false; 
+		}
+	}
+	
+	if( allQuotesAnswered )
+	{
+		quotes = copyArray( quotesCopy ); 
+	}
+	
+	
+	// Ensure that the random number generated is not a blank quote. 
+	var quoteFound = false; 
+	
+	while( !quoteFound )
+	{
+		if( quotes[ randomNumber ] != "" )
+		{
+			quoteFound  = true; 
+		}
+		else
+		{
+			randomNumber = (randomNumber + 1) % quotes.length ;
+		}
+	}
+	
+	// Gloabal reference to the index of the quote chosen. 
+	currentQuoteIndex = randomNumber; 
+	
+	// Assigning a quote chosen randomly by randomNumber. 
+	var chosenQuote = quotes[ randomNumber ];
+	
+	txtQuote.value = chosenQuote; 
+	
+	quotes[randomNumber] = "";
+	
+	//If there is a multimedia asset associated with this item,
+	//insert it into the multimedia frame. 
+	
+	if( multimedia[randomNumber] != null)
+	{
+		// There is multimedia for this question. 
+		var multimediaFrame = document.getElementById("multiMediaFrame");
+		
+		//Youtube Video:
+		if(multimedia[randomNumber].search("youtube.com") != -1)
+		{
+			var iframe = document.createElement("iframe");
+			
+			iframe.setAttribute("src",multimedia[randomNumber]);
+			
+			iframe.setAttribute("width","420");
+			iframe.setAttribute("height","315");
+			
+			multimediaFrame.appendChild(iframe);
+
+		}
+		else
+		{
+			// Image
+			document.getElementById("multiMediaFrame").innerHTML='<img width="420" height ="315" src="'+multimedia[randomNumber]+'">';
+			
+		}
+	}
+
+	return currentQuoteIndex;
+}
+
+function onLoad()
+{
+	// Get a random quote from the quote array and place it in the text area reffered to by txtQuote
+	// Also, we make the chosen quote blank so that it is not selected again. 
+	
+	txtQuote = document.getElementById("quote");
+	txtAnswer = document.getElementById("answer");
+
+	selectRandomQuote();
+}
+
+
+
+</script>
+
+
+</head>
+
+<body onload="onLoad()">
+
+
+<center><h1>&nbsp;</h1>
+  <h1>&nbsp;</h1>
+  <h1 style="font:'Palatino Linotype', 'Book Antiqua', Palatino, serif">Q&amp;A Practice</h1>
+</center>
+
+<div id="multiMediaFrame"></div>
+
+<div id="main" style="width:400; margin:0 auto; text-align:center; margin-top:2%; color: #F00;">
+    <textarea cols="50" rows="5" id="quote"></textarea>
+    <br>
+    <input type="text" id="answer"><br>
+    <button onclick="onAnswer()">Answer</button>
+</div>
+
+<div id="bgImg">
+<img src="bg.jpg" width="100%" height="100%" /> </div>
+
+
+
+
+</body></html>

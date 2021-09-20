@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Put your title here</title>
+<style type="text/css">
+body {
+	background-color: #00F;
+}
+body,td,th {
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div style="text-align:center; font-size:35px; margin-bottom:10px;">Mr. Saladin's Group Maker</div>
+<div style="float:left; font-size: 24px;">
+<label>Number of groups: </label><input type="text" id="nGroups" /><br />
+<label>Student names(  separated by commas ):</label><br />
+<textarea id="studentNames" name="" cols="" rows="" style="width:500px; height:500px;"></textarea>
+
+<br />
+<button onclick="splitIntoGroups()">Divide students into groups</button>
+</div>
+
+<div style="float:left;">
+<div style="text-align:center; width:600px; margin:0 auto;">Groups</div>
+	<div id="groupsContainer" style="padding:5px; border:thin #000 solid; width:600px; margin:0 auto; text-align:center;"></div>
+</div>
+
+<script language="javascript">
+function createTextArea()
+{
+	var tmp = document.createElement("textArea");
+	tmp.style.width = "31%";
+	tmp.style.height = "200px";
+	return tmp;
+}
+
+function splitIntoGroups()
+{
+	var studentNames = document.getElementById("studentNames").value.split(',');
+	var numberOfGroups = parseInt( document.getElementById("nGroups").value );
+	var nStudentsInEachGroup = Math.floor( studentNames.length / numberOfGroups );
+	var groupsContainer = document.getElementById("groupsContainer");
+	var groupTextAreas = new Array();
+	
+	groupsContainer.innerHTML = "";
+	
+	for( var i = 1; i <= numberOfGroups; i++)
+	{
+		var groupString = "";
+		var groupTextArea = createTextArea();
+		groupsContainer.appendChild( groupTextArea );
+		groupTextAreas.push( groupTextArea );
+		
+		for( var f = 0; f < nStudentsInEachGroup; f++)
+		{
+			var randomStudentIndex = Math.floor(Math.random()*(studentNames.length));
+			
+			while( studentNames[randomStudentIndex] == "" )
+			{
+				randomStudentIndex = (randomStudentIndex + 1 ) % studentNames.length;
+			}
+		
+		
+			groupString += studentNames[randomStudentIndex];
+			
+			if( f + 1 < nStudentsInEachGroup )
+			{
+				groupString += ",";
+			}
+				
+			studentNames[randomStudentIndex] = "";
+		}
+			
+		groupTextArea.value = groupString;
+		
+		// If this is the last group, add any remainder students.
+		if( i + 1 > numberOfGroups )
+		{
+			var textAreasItter = groupTextAreas.length-1;
+			
+			for( var f = 0; f < studentNames.length; f++)
+			{
+				if( studentNames[f] != "" )
+				{
+					alert( studentNames[f] );
+					groupTextAreas[textAreasItter--].value += ","+studentNames[f];
+				}
+			}
+		}
+		
+		
+	
+	}
+	
+
+	
+	// Add remainder student to last group.
+}
+
+</script>
+
+</body>
+</html>

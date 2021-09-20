@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+.heading {
+	text-align: center;
+}
+.headingSize {
+	font-size: 36px;
+	text-align:center;
+	font-family: "Arial Black", Gadget, sans-serif;
+	color: #FFF;
+}
+headingStyle {
+	text-align: center;
+}
+.buttonCenter {
+	text-align: center;
+	color: #FFF;
+	font-size: 24px;
+}
+body p {
+	color: #FFF;
+}
+-->
+</style>
+
+<script language="javascript" type="text/javascript">
+ 
+function loadAudio()
+{
+	var soundDiv = document.getElementById("audio");
+	
+	soundDiv.innerHTML = '<embed src="billymadison.swf" width="1" height="1"></embed>'+
+	;
+}
+
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="5" bgcolor="#0099FF" class="headingSize">Honors Western Studies<br />
+   Extemporaneous Speaking<br />
+   Quality Index
+   </td>
+  </tr>
+  <tr>
+    <td width="15%" bgcolor="#FF0000">&nbsp;</td>
+    <td width="14%" bgcolor="#FF0000">&nbsp;</td>
+    <td width="41%" bgcolor="#0099FF">&nbsp;</td>
+    <td width="9%" bgcolor="#FF0000">&nbsp;</td>
+    <td width="21%" bgcolor="#FF0000">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#0099FF" class="buttonCenter"><p>Press Button and Begin Speaking</p>
+    <p>
+      <label>
+        <input type="submit" name="button" id="button" value="Submit" />
+      </label>
+    </p>
+    <p>&nbsp;</p></td>
+    <td colspan="2" bgcolor="#FF0000">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#0099FF" class="buttonCenter"> <p>Press Button Upon Completion of Speech.
+      </p>
+      <button onclick="loadAudio();">Submit</button>
+    
+    <p>&nbsp;</p></td>
+    <td bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#FF0000">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#0099FF">&nbsp;</td>
+    <td bgcolor="#FF0000">&nbsp;</td>
+    <td bgcolor="#FF0000">&nbsp;</td>
+  </tr>
+</table>
+<div id="audio"></div>
+
+</body>
+</html>

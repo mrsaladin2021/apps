@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,td,th {
+	background-color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	margin:0;
+}
+
+#bgImg
+{
+	position:fixed;
+	height:100%;
+	width:100%;
+	top:0px;
+	left:0px;
+	z-index:-1;
+
+}
+
+#cards
+{
+	
+}
+
+#mainContainer
+{
+	border:thick solid #999;
+	width:1130px;
+	background-image:url(../img/bgTile.fw.png);
+	padding-bottom:50px;
+}
+
+#card1
+{
+	padding-left:50px;
+	position:absolute;
+}
+
+#card2
+{
+	padding-left:400px;
+	position:absolute;
+	
+}
+
+#card3
+{
+	padding-left:750px;
+}
+
+
+#face1
+{
+	position:absolute;
+	padding-top:40px;
+	padding-left:14px;
+
+}
+
+#face2
+{
+	position:absolute;
+	padding-top:40px;
+	padding-left:14px;
+}
+
+#face3
+{
+	position:absolute;
+	padding-top:40px;
+	padding-left:14px;
+}
+
+.textFieldFrame
+{
+	position:absolute;
+	padding-top:310px;
+	padding-left:15px;
+}
+
+.textField
+{
+	color:#333;
+	font-size:24px;
+	width:293px;
+	height:100px;
+	text-align:center;
+	display: table-cell;
+	vertical-align:middle;
+}
+
+#titleImage
+{
+	text-align:center;
+	padding-top:10px;
+}
+
+#makeStoryFrame
+{
+	padding-top:20px;
+	padding-bottom:20px;
+	text-align:center;
+	cursor:pointer;
+}

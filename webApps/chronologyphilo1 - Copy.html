@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Put your title here</title>
+<style type="text/css">
+body {
+	background-color: #00F;
+	font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+
+<body>
+<div style="font-size:36px; text-align:center; color: #FFF; font-weight: bold;">Mr. Saladin's Philosophy Chronology</div>
+<!-- Change subtitle here -->
+<div style="font-size:20px; text-align:right; color: #FFF; font-weight: bold;">
+  
+</div>
+<div id="main" style="text-align:center; margin-top:10px; color:#FFF">
+</div>
+
+<div id="tries" style="position:absolute; top:0px; left:0px; width:50px; height:50px; background-color:#F00; font-size:45px; text-align:center;">
+6
+</div>
+
+<center><button onclick="onSubmit()">Submit</button></center>
+
+<script language="javascript" type="application/javascript">
+
+function onSubmit()
+{
+	var atLeastOneWrong = false;
+		
+	for( var i = 0; i < entryBoxes.length; i++)
+	{
+	
+		if( entryBoxes[i][0] == parseInt(entryBoxes[i][1].value) )
+		{
+			// Mark correct.
+			entryBoxes[i][1].style.backgroundColor = "#0F0";
+		}
+		else
+		{
+			entryBoxes[i][1].style.backgroundColor = "#F00";
+			atLeastOneWrong = true;
+		}
+	}
+	
+	if( atLeastOneWrong )
+	{
+		// Reduce tries. 
+		var newTries = parseInt( document.getElementById("tries").innerHTML ) - 1;
+		document.getElementById("tries").innerHTML = newTries;
+		
+		if( newTries == 9 )
+		{
+			// Fail.
+			document.body.innerHTML = "You lose!<br/><button onclick='javascript:location.reload(true)'>Retry</button>";
+		}
+	}
+	else
+	{
+		alert(" You are presented with three boxes. One contains only apples, one contains only oranges and one contains a mix of apples and oranges.  Each box has a label on it.  one says APPLES, one says ORANGES and one says APPLES AND ORANGES but each one of these labels has been placed on the wrong box. You cant look into any of the boxes to see which contains what but you can remove one fruit from one of the boxes.  What can you do to set the labels right?   ");
+	}
+}
+
+function createEntryBox()
+{
+	var tmp = document.createElement("input");
+	tmp.setAttribute("type","text");
+	return tmp;
+}
+
+function makeLabel( val )
+{
+	var tmp = document.createElement("label");
+	tmp.innerHTML = val;
+	return tmp;
+}
+
+var numOrder = new Array();
+
+/** Enter the correct order here **/
+/* Example for correct order 3 , 20, 25, 27, 29, 30, 31, 44:
+ * numOrder.pushBack( 3 );
+ * numOrder.push( 20 );
+ */
+
+
+numOrder.push( 66);
+numOrder.push( 29 );
+numOrder.push( 8 );
+numOrder.push( 98);
+numOrder.push( 44  );
+numOrder.push( 25 );
+numOrder.push( 11);
+numOrder.push( 77 );
+numOrder.push( 28 );
+numOrder.push( 32 );
+numOrder.push( 4 );
+numOrder.push( 100 );
+numOrder.push( 7 );
+numOrder.push( 20);
+numOrder.push( 10 );
+			
+
+
+/***********************************/
+
+/** Set the number of default tries here **/
+
+document.getElementById("tries").innerHTML = 2;
+
+/***********************************/
+
+// [ valid value, entryEntity ]
+var entryBoxes = new Array();
+
+var mainBox = document.getElementById("main");
+
+// Create entry boxes. 
+for( var i = 0; i < numOrder.length; i++)
+{
+	var tmpEntry = createEntryBox();
+	var labelDiv = document.createElement("div");
+	
+	entryBoxes.push( [ numOrder[i] , tmpEntry ] );
+	
+	labelDiv.appendChild( makeLabel( i+1 ) );
+	
+	mainBox.appendChild( labelDiv );
+	
+	mainBox.appendChild( tmpEntry );
+	mainBox.appendChild( document.createElement("br") );
+}
+
+</script>
+
+</body>
+</html>
