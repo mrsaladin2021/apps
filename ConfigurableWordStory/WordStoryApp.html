@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<script type="text/javascript" language="javascript" src="js/jquery-3.1.0.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mr. Saladin's: Card Story</title>
+<style type="text/css">
+body,td,th {
+	background-color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	margin:0;
+}
+
+#bgImg
+{
+	position:fixed;
+	height:100%;
+	width:100%;
+	top:0px;
+	left:0px;
+	z-index:-1;
+
+}
+
+#cards
+{
+	
+}
+
+#mainContainer
+{
+	border:thick solid #999;
+	width:1130px;
+	background-image:url(img/bgTile.fw.png);
+	padding-bottom:50px;
+}
+
+#card1
+{
+	padding-left:50px;
+	position:absolute;
+}
+
+#card2
+{
+	padding-left:400px;
+	position:absolute;
+	
+}
+
+#card3
+{
+	padding-left:750px;
+}
+
+
+#face1
+{
+	position:absolute;
+	padding-top:40px;
+	padding-left:14px;
+
+}
+
+#face2
+{
+	position:absolute;
+	padding-top:40px;
+	padding-left:14px;
+}
+
+#face3
+{
+	position:absolute;
+	padding-top:40px;
+	padding-left:14px;
+}
+
+.textFieldFrame
+{
+	position:absolute;
+	padding-top:310px;
+	padding-left:15px;
+}
+
+.textField
+{
+	color:#333;
+	font-size:24px;
+	width:293px;
+	height:100px;
+	text-align:center;
+	display: table-cell;
+	vertical-align:middle;
+}
+
+#titleImage
+{
+	text-align:center;
+	padding-top:10px;
+}
+
+#makeStoryFrame
+{
+	padding-top:20px;
+	padding-bottom:20px;
+	text-align:center;
+	cursor:pointer;
+}
+
+</style>
+<script type="text/javascript">
+
+var wordBank1 = [];
+var wordBank2 = [];
+var wordBank3 = [];
+
+var associatedImages1 = [];
+var associatedImages2 = [];
+var associatedImages3 = [];
+
+getTxt = function (){
+
+	$.ajax({
+		url:'WordStoryConfig.txt',
+		success: function (data){
+
+			lines = data.split('\n');
+
+			var currentCard = 1;
+
+			for(var i = 0; i < lines.length; i++) {
+				if (lines[i] == "#") {
+					currentCard++;
+				}
+				else {
+					//We are at an image.
+					switch (currentCard) {
+						case 1:
+							associatedImages1.push(lines[i]);
+							wordBank1.push(lines[++i]);
+
+							break;
+						case 2:
+
+							associatedImages2.push(lines[i]);
+							wordBank2.push(lines[++i]);
+
+							break;
+						case 3:
+							associatedImages3.push(lines[i]);
+							wordBank3.push(lines[++i]);
+							break;
+					}
+				}
+			}
+		}
+	});
+};
+
+getTxt();
+
+// Check if any word banks are blank.
+
+var associatedImagePath = "";
+
+// We are going to use this random images for now. 
+function setRandomImages()
+{
+	var randomImagePath = "img/randomCardImages/";
+	var randomImages = ["bannanas.jpg","bear.jpg","bird.jpg","cone.jpg","dots.jpg","gumBalls.jpg","swirl.jpg","tiger.jpg"];
+	var indexOfRandom = [];
+	
+	// Find three different random numbers
+	while(indexOfRandom.length < 3)
+	{
+		var randomImage = Math.floor(Math.random() * randomImages.length );
+		var found = false; 
+		
+		for(var i = 0; i < indexOfRandom.length; i++)
+		{
+			if( indexOfRandom[i] == randomImage )
+			{
+				found = true;
+			}
+		}
+		
+		if(!found)
+		{
+			indexOfRandom.push(randomImage);
+		}
+	}
+	
+	document.getElementById("faceImage1")
+	.setAttribute("src",randomImagePath+randomImages[indexOfRandom[0]]);
+	
+	document.getElementById("faceImage2")
+	.setAttribute("src",randomImagePath+randomImages[indexOfRandom[1]]);
+	
+	document.getElementById("faceImage3")
+	.setAttribute("src",randomImagePath+randomImages[indexOfRandom[2]]);
+}
+
+function makeStory()
+{
+	// Cange this when we have associated images. 
+	if( associatedImages1.length == 0 )
+	{
+		setRandomImages();
+	}
+	
+	var rand1 = Math.floor( (Math.random() * wordBank1.length ) + 0 );
+	var rand2 = Math.floor( (Math.random() * wordBank2.length ) + 0 );
+	var rand3 = Math.floor( (Math.random() * wordBank3.length ) + 0 );
+	
+	var randWord1 = wordBank1[rand1];
+	var randWord2 = wordBank2[rand2];
+	var randWord3 = wordBank3[rand3];
+	
+	document.getElementById("text1").innerHTML = randWord1;
+	document.getElementById("text2").innerHTML = randWord2;
+	document.getElementById("text3").innerHTML = randWord3;
+	
+	document.getElementById("faceImage1")
+	.setAttribute("src",associatedImagePath+associatedImages1[rand1]);
+
+	document.getElementById("faceImage2")
+	.setAttribute("src",associatedImagePath+associatedImages2[rand2]);
+	
+	document.getElementById("faceImage3")
+	.setAttribute("src",associatedImagePath+associatedImages3[rand3]);
+	
+}
+
+
+
+</script>
+
+</head>
+
+<body onload="setRandomImages()">
+<!-- A card image face is: 295X247=wxh !-->
+
+<div id="mainContainer">
+
+<div id="titleImage">
+	<img src="img/title.fw.png" width="576" height="221" />
+</div>
+
+<div onclick="makeStory()" id="makeStoryFrame">
+	<img src="img/makeButton.fw.png" width="200" height="40" />
+</div>
+
+<div id="cards">
+    <div id="card1">
+        <div id="face1">
+            <img id="faceImage1" src="img/randomCardImages/tiger.jpg" width="295" height="247" /> 
+        </div>
+        <div class="textFieldFrame" >
+        	<div class="textField" id="text1">Make a Story</div>
+        </div>
+       
+        <img src="img/finalCardBack.fw.png" width="322" height="453" />
+    </div>
+    
+    <div id="card2">
+        <div id="face2">
+            <img id="faceImage2" src="img/randomCardImages/tiger.jpg" width="295" height="247" /> 
+        </div>
+         <div class="textFieldFrame" >
+        	<div class="textField" id="text2">Make a Story</div>
+        </div>
+       
+        <img src="img/finalCardBack.fw.png" width="322" height="453" />
+    </div>
+    
+    <div id="card3">
+        <div id="face3">
+            <img id="faceImage3" src="img/randomCardImages/tiger.jpg" width="295" height="247" /> 
+        </div>
+         <div class="textFieldFrame" >
+        	<div class="textField" id="text3">Make a Story</div>
+        </div>
+       
+        <img src="img/finalCardBack.fw.png" width="322" height="453" />
+    </div>
+</div>
+
+</div>
+
+
+<script language="javascript">
+function createTextArea()
+{
+	var tmp = document.createElement("textArea");
+	tmp.style.width = "31%";
+	tmp.style.height = "200px";
+	return tmp;
+}
+
+function load()
+{
+	// Randomly generate several times in order to save images in cashe. 
+	for( var i = 0; i < 100; i++ )
+	{
+		makeStory();
+	}
+}
+
+
+
+
+</script>
+</body>
+</html>

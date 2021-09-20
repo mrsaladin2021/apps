@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/FileSaver.min.js" language="javascript"></script>
+    <style type="text/css">
+        #imagePool{
+            height:400px;
+            overflow:scroll;
+            border: solid black thin;
+            padding-top: 30px;
+
+        }
+
+        .dropArea
+        {
+            width:32%;
+            height:500px;
+            border: solid black thin;
+            overflow: scroll;
+            float: left;
+            margin-right: 5px;
+            padding-top: 100px;
+        }
+
+        .cardEntry
+        {
+        }
+
+        .cardText
+        {
+            margin-left: 6px;
+            width:60%;
+        }
+
+
+    </style>
+    <script language="javascript">
+
+        var currentIMG=1;
+        var validImages = new Array();
+        var supportedExtensions = [".jpg",".bmp",".jpeg",".png",".jpe",".tiff",".svg"];
+        var poolImgWidth = 100;
+        var poolImgHeight = 100;
+
+        function loadImage(URL) {
+            var tester=new Image();
+            tester.onload=function(){imageFound(URL)};
+            tester.onerror=imageNotFound;
+            tester.src=URL;
+        }
+
+        function imageFound(URL) {
+            validImages.push(URL);
+            addImage(URL);
+            currentIMG += 1;
+            preload(currentIMG);
+        }
+
+        function imageNotFound() {
+            //alert('That image was not found.');
+        }
+
+        // Add image to image pool.
+        function addImage(URL) {
+            var ni = document.createElement("img");
+            ni.src =URL;
+            ni.width = poolImgWidth;
+            ni.height = poolImgHeight;
+            ni.id = "img"+currentIMG;
+            ni.setAttribute("draggable","true");
+            ni.setAttribute("ondragstart","drag(event)");
+            document.getElementById("imagePool").appendChild(ni);
+        }
+
+        function preload(imgID)
+        {
+            // If one exists, we will continue to chain load, otherwise we won't.
+            for(var i =0; i < supportedExtensions.length; i++){
+                loadImage("putImagesHere/"+imgID+supportedExtensions[i]);
+            }
+
+        }
+
+        // Drag and Drop Fn's
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            if ( event.target.nodeName !== "IMG" && (event.target.id == "imagePool" ||
+                     event.target.id == "d1" || event.target.id == "d2" || event.target.id == "d3") ) {
+                var data = ev.dataTransfer.getData("text");
+
+
+                var cont = document.createElement("div");
+                cont.setAttribute("class","cardEntry");
+                cont.id = data + "cardEntry";
+
+                var txt = document.createElement("input");
+                txt.setAttribute("type","text");
+                txt.setAttribute("class","cardText");
+
+
+                var child = null;
+
+
+                child = document.getElementById(data);
+
+
+                if(ev.target.id != "imagePool")
+                {
+                    cont.appendChild(child );
+                    cont.appendChild(txt);
+                    ev.target.insertBefore( cont  , ev.target.firstChild );
+                }
+                else
+                {
+
+                    var elm = document.getElementById(data + "cardEntry");
+                    elm.parentNode.removeChild(elm);
+                    ev.target.appendChild(child);
+                }
+
+
+
+
+            }
+
+
+
+        }
+
+        function makeConfigFile() {
+            //pathToFirstFile
+            //description
+            //...
+            //# ( denotes next card )
+
+            var outStr = "";
+
+            var cardBoxes = ["d1","d2","d3"];
+
+            for(var i = 0; i < cardBoxes.length; i++) {
+                var cardBox = document.getElementById(cardBoxes[i]);
+
+                var children = cardBox.childNodes;
+
+                for (var f = 0; f < children.length; f++) {
+                    if (children[f].tagName == "DIV") {
+                        //Get relative path.
+                        var startIDX = children[f].childNodes[0].src.indexOf("putImagesHere") ;
+                        var relPath = children[f].childNodes[0].src.substr(startIDX);
+
+                        outStr += relPath + "\n";
+                        if(children[f].childNodes[1].value.length <= 0)
+                        {
+                            outStr += "--\n";
+                        }
+                        else {
+                            outStr += children[f].childNodes[1].value + "\n";
+                        }
+
+                    }
+                }
+
+                outStr += "#\n"
+            }
+
+            var blob = new Blob([outStr], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, "WordStoryConfig.txt");
+        }
+
+        // Start the preload chain.
+        preload(1);
+
+
+
+
+
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Config Maker for Word Story</title>
+</head>
+<body style="padding: 5px;">
+
+<center>
+    <h1>Configuration File Maker</h1>
+    <h3>For Mr.Saladan's Card Story</h3>
+</center>
+<div id="imagePool"  ondrop="drop(event)" ondragover="allowDrop(event)">
+
+</div>
+<div style="margin-top: 20px;">
+    <div id="d1" class="dropArea" ondrop="drop(event)" ondragover="allowDrop(event)">
+    </div>
+    <div id="d2" class="dropArea" ondrop="drop(event)" ondragover="allowDrop(event)">
+    </div>
+    <div id="d3" class="dropArea" ondrop="drop(event)" ondragover="allowDrop(event)">
+    </div>
+</div>
+
+<div style="padding-top: 10px; text-align: center; clear: left; font-size: 40px;">
+    ----------------&gt; <button onClick="makeConfigFile()" style="width: 300px; height: 200px; font-size: 30px;">Make Config File</button> &lt;----------------
+</div>
+
+</body>
+</html>
