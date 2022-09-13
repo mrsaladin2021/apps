@@ -35,7 +35,7 @@ function onSubmit()
 	for( var i = 0; i < entryBoxes.length; i++)
 	{
 	
-		if( entryBoxes[i][0] == parseInt(entryBoxes[i][1].value) )
+		if( entryBoxes[i][0] == entryBoxes[i][1].value.toUpperCase()) 
 		{
 			// Mark correct.
 			entryBoxes[i][1].style.backgroundColor = "#0F0";
